@@ -1,7 +1,9 @@
 @include('include.navbar')
 
 <div class="bg-white mt-28">
-   <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 shadow-md ">
+
+   <!-- New Product -->
+   <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-16 lg:max-w-7xl lg:px-8 shadow-md ">
       <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-mont">New Product</h2>
 
       <div class="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
@@ -84,6 +86,8 @@
 
    </div>
 
+
+   <!-- Best Seller -->
    <div class="mx-auto max-w-2xl mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 shadow-md ">
       <h2 class="text-2xl font-bold tracking-tight text-gray-900">Best Seller</h2>
 
