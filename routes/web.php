@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/navbar', function () {
     return view('include/navbar');
 });
+
+Route::get('/keranjang', function () {
+    return view('keranjang');
+});
