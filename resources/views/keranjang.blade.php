@@ -1,6 +1,7 @@
 @include('include.navbar')
+<title>Keranjang</title>
 
-<div class="mt-28 flex place-content-center">
+<div class="mt-28 flex place-content-center h-screen">
 
     <!-- card baramg -->
 
@@ -199,7 +200,7 @@
             <p>Total</p>
             <p>Rp. 100.000</p>
         </div>
-        <button class="w-full bg-indigo-500/90 rounded-lg text-white hover:bg-indigo-700">
+        <button type="submit" class="w-full bg-indigo-500/90 rounded-lg text-white hover:bg-indigo-700">
             <h1 class="p-3">Bayar</h1>
         </button>
     </div>

@@ -56,7 +56,7 @@
 
    <!-- New Product -->
    <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8 shadow-md mt-24 drop-shadow-lg">
-      <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-mont">New Product</h2>
+      <h2 class="text-2xl font-bold tracking-tight text-gray-900">New Product</h2>
 
       <div class="mt-6 grid grid-cols-1 gap-x-3 gap-y-5 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-4">
          <div class="group relative border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg max-w-60 max-h-72">
