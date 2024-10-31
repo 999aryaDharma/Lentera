@@ -16,3 +16,6 @@ Route::get('/keranjang', function () {
 Route::get('/detail', function () {
     return view('detail');
 });
+Route::get('/pembayaran', function () {
+    return view('pembayaran');
+});
