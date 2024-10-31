@@ -17,10 +17,6 @@ Route::get('/detail', function () {
     return view('detail');
 });
 
-Route::get('/bayar', function () {
-    return view('bayar');
-});
-
 Route::get('/login', function () {
     return view('auth/loginpage');
 });
