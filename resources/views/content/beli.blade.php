@@ -1,4 +1,8 @@
-@include('include.navbar')
+
+<title>Pembayaran</title>
+@extends('navbar')
+
+@section('content')
 <div class="absolute font-sans mt-20 w-full">
 
   <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
@@ -113,7 +117,9 @@
         <p>Total Tagihan</p>
         <p>Rp501.000</p>
       </div>
-      <button class="mt-4 w-full bg-indigo-500/90 hover:bg-indigo-700 text-white py-2 rounded-lg cursor-not-allowed" disabled>Bayar</button>
+      <button class="mt-4 w-full bg-indigo-500/90 hover:bg-indigo-700 text-white py-2 rounded-lg cursor-not-allowed" disabled><a href="">Bayar</a></button>
     </div>
   </div>
 </div>
+
+@endsection

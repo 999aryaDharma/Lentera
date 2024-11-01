@@ -1,5 +1,6 @@
-@include('include.navbar')
+@extends('navbar')
 
+@section('content')
 <div class="flex font-sans mt-28 mb-14 mx-44  ">
    <div class="flex-none h-96 w-96 relative group  border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg ">
       <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" class="absolute  inset-0 w-full h-full object-cover" loading="lazy" />
@@ -167,7 +168,7 @@
          </div>
          <p class="text-gray-800 text-2xl font-semibold mt-4">Rp500.000</p>
          <div class="flex space-x-4 mt-4">
-            <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">Beli</button>
+            <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"><a href="{{route('beli')}}">Beli</a></button>
             <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">+ Keranjang</button>
          </div>
          <div class="flex items-center space-x-4 text-gray-500 text-sm mt-4">
@@ -332,7 +333,7 @@
 
 </div>
 
-@include('include.footer')
+@endsection
 
 <script src="http://ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js" type="text/javascript"></script>
 <script type="text/javascript">

@@ -1,6 +1,8 @@
-@include('include.navbar')
 <title>Keranjang</title>
 
+@extends('navbar')
+
+@section('content')
 <div class="mt-28 flex place-content-center h-screen">
 
     <!-- card baramg -->
@@ -194,17 +196,17 @@
     </div>
 
     <!-- card pembayaran -->
-    <div class="w-1/4 max-h-52 px-4 py-8 mt-10 sm:px-6 sm:py-10 lg:max-w-3xl lg:px-8 border-2 rounded-lg text-center">
+    <div class="w-1/4 max-h-52 px-4 py-8 mt-10 sm:px-6 sm:py-10 lg:max-w-3xl lg:px-8 border-2 rounded-lg text-center sticky top-28">
         <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-mont">Pembelian</h2>
         <div class="flex justify-between py-5">
             <p>Total</p>
             <p>Rp. 100.000</p>
         </div>
-        <button type="submit" class="w-full bg-indigo-500/90 rounded-lg text-white hover:bg-indigo-700">
-            <h1 class="p-3">Bayar</h1>
-        </button>
+        <a href="{{route('beli')}}">
+            <button type="submit" class="w-full bg-indigo-500/90 rounded-lg text-white hover:bg-indigo-700">
+                <h1 class="p-3">Beli Langsung</h1>
+            </button>
+        </a>
     </div>
 
 </div>
-
-@include('include.footer')

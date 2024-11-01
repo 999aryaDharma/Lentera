@@ -1,5 +1,8 @@
-@include('include.navbar')
+<title>Lentera</title>
 
+@extends('navbar')
+
+@section('content')
 <div class="mt-28">
 
    <!-- Carousel -->
@@ -66,7 +69,7 @@
             <div class="mt-4 flex justify-between">
                <div>
                   <h3 class="text-sm text-gray-700">
-                     <a href="#">
+                     <a href="{{route('detail')}}">
                         <span aria-hidden="true" class="absolute inset-0"></span>
                         Basic Tee
                      </a>
@@ -539,4 +542,4 @@
    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 
-   @include('include.footer')
+@endsection
