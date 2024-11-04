@@ -1,3 +1,4 @@
+<title>Detail</title>
 @extends('navbar')
 
 @section('content')
@@ -82,13 +83,13 @@
       <p class="text-lg text-slate-700">
          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error saepe magnam, modi odit labore officia natus. Cum laudantium aperiam, cumque esse natus, alias blanditiis facilis omnis ex consectetur fugiat quaerat distinctio asperiores dolorem dolore repellendus sint ratione earum labore suscipit
          eygfyegfyge feuwgyfeg egywgfyew. <br><a class="readmore text-indigo-500/90">Read More </a>
-      <div class="message text-lg">
+      <!-- <div class="message text-lg">
          To give an attractive look to web sites, styles are heavily used.
          JQuery is a powerful JavaScript library that allows us to add dynamic elements to our web
          sites. Not only it is easy to learn, but it's easy to implement too. A person must have a
          good knowledge of HTML and CSS and a bit of JavaScript. jQuery is an open source project
          that provides a wide range of features with cross-platform compatibility. <br><a class="hide text-indigo-500/90">Hide</a>
-      </div>
+      </div> -->
       </p>
    </form>
 </div>

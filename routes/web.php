@@ -46,3 +46,33 @@ route::get('/register', 'App\Http\Controllers\authController@create')->name('reg
 route::get('/beli', 'App\Http\Controllers\pembelianController@index')->name('beli');
 
 route::get('/alamat', 'App\Http\Controllers\alamatController@index')->name('alamat');
+
+
+
+// Admin
+route::get('/sidebar', function () {
+    return view('admin.sidebar');
+});
+route::get('/admin', function(){
+    return view('admin.dashboard');
+})->name('admin');
+// route::get('/product', function () {
+//     return view('admin.product');
+
+// route::get('/category', function(){
+//     return view('admin.category');
+// })->name('category');
+// });
+
+// route::get('/user', function(){
+//     return view('admin.user');
+// });
+
+route::get('/order', function(){
+    return view('admin.orderList');
+})->name('order');
+
+
+route::get('/product', 'App\Http\Controllers\productAdminController@index')->name('productAdmin');
+route::get('/category', 'App\Http\Controllers\categoryController@index')->name('category');
+route::get('/user', 'App\Http\Controllers\userController@index')->name('user');
