@@ -1,4 +1,4 @@
-@extends('navbar')
+@extends('layout.navbar')
 
 @section('content')
 <div class="mt-28">

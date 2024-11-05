@@ -1,6 +1,6 @@
 <title>Lentera</title>
 
-@extends('navbar')
+@extends('layout.navbar')
 
 
 @section('content')

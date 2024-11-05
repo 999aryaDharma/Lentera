@@ -1,6 +1,6 @@
 
 <title>Pembayaran</title>
-@extends('navbar')
+@extends('layout.navbar')
 
 @section('content')
 <div class="absolute font-sans mt-20 w-full">

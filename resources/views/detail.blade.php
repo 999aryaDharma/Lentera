@@ -1,5 +1,5 @@
 <title>Detail</title>
-@extends('navbar')
+@extends('layout.navbar')
 
 @section('content')
 <div class="flex font-sans mt-28 mb-14 mx-44  ">

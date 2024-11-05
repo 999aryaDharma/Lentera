@@ -12,7 +12,7 @@ class alamatController extends Controller
     public function index()
     {
         //
-        return view('content.alamat');
+        return view('alamat');
     }
 
     /**

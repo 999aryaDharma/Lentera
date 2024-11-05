@@ -13,7 +13,7 @@ class productController extends Controller
     public function index()
     {
         //
-        return view('content.index');
+        return view('index');
     }
 
     /**
@@ -38,7 +38,7 @@ class productController extends Controller
     public function show() //(string $id)
     {
         //
-        return view('content.detail');
+        return view('detail');
     }
 
     /**
