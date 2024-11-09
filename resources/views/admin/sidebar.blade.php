@@ -15,7 +15,7 @@
     <!-- Navbar -->
     <div class="bg-indigo-800 w-full h-20 text-white flex justify-between place-items-center fixed top-0">
         <div class="grid w-1/6 place-content-center">
-            <img src="img/LenteraPutih.png" alt="" class="h-20">
+            <img src="/img/LenteraPutih.png" alt="" class="h-20">
         </div>
         <button class="flex gap-2 mr-20"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-user">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -48,7 +48,7 @@
                 Product
             </a>
 
-            <a href="{{route('category')}}" class="mt-7 flex gap-2 hover:text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-category">
+            <a href="{{route('category.index')}}" class="mt-7 flex gap-2 hover:text-slate-400"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-category">
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M4 4h6v6h-6z" />
                     <path d="M14 4h6v6h-6z" />

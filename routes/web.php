@@ -74,5 +74,8 @@ route::get('/order', function(){
 
 
 route::get('/product', 'App\Http\Controllers\productAdminController@index')->name('productAdmin');
-route::get('/category', 'App\Http\Controllers\categoryController@index')->name('category');
+
+// route::get('/category', 'App\Http\Controllers\categoryController@index')->name('category');
+route::resource('/category', 'App\Http\Controllers\categoryController');
+
 route::get('/user', 'App\Http\Controllers\userController@index')->name('user');

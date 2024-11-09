@@ -19,7 +19,7 @@
         </div>
     </a>
 
-    <a href="{{route('category')}}" class=" h-32 shadow-md border-2 rounded-lg flex justify-center place-items-center gap-2 px-5">
+    <a href="{{route('category.index')}}" class=" h-32 shadow-md border-2 rounded-lg flex justify-center place-items-center gap-2 px-5">
         <svg class="w-28 h-28 text-slate-200" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="icon icon-tabler icons-tabler-filled icon-tabler-category">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M10 3h-6a1 1 0 0 0 -1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1 -1v-6a1 1 0 0 0 -1 -1z" />
