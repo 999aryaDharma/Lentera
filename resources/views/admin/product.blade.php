@@ -1,7 +1,10 @@
 @extends('layout.sidebar')
 
+@section('title')
+    <h3 class="ml-4">Manage Product</h3>
+@endsection
+
 @section('admin')
-<h1 class="font-bold text-3xl">Product</h1>
 <table class="table-fixed border-collapse p-10 rounded-lg">
     <thead class="border-b-2">
         <tr class="text-indigo-500/50">

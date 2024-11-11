@@ -41,6 +41,9 @@ $(function() {
             url: form.attr('action'), // URL pengiriman
             data: form.serialize(), // Serialisasi data formulir
             success: function(response) {
+
+                let redirectRoute = form.data('redirect-route');
+
                 // Tampilkan SweetAlert untuk notifikasi sukses
                 Swal.fire({
                     title: "Success!",
@@ -48,7 +51,7 @@ $(function() {
                     icon: "success",
                     confirmButtonColor: '#7066E0',
                 }).then(() => {
-                    window.location.href = "/admin/user"; // Ganti dengan route yang sesuai
+                    window.location.href = redirectRoute; // Ganti dengan route yang sesuai
                 });
             },
             error: function(xhr) {

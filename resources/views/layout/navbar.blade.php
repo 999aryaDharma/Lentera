@@ -39,16 +39,31 @@
             </div>
         </form>
 
-        <div>
-            <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                    <path d="M17 17h-11v-14h-2" />
-                    <path d="M6 5l14 1l-1 7h-13" />
-                </svg>
+        <div class="flex gap-7">
+            <a href="">
+                <div class=" hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                        <path d="M17 17h-11v-14h-2" />
+                        <path d="M6 5l14 1l-1 7h-13" />
+                    </svg>
+                </div>
+            </a>
+            <a href="">
+                <div class=" hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-bag">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                            d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" />
+                        <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
+                    </svg>
+                </div>
             </a>
         </div>
         @guest
@@ -60,9 +75,9 @@
                         href="{{ route('register') }}" class="text-center m-5 ">Daftar</a></button>
             </div>
         @else
-            <div class="relative">
+            <div class="relative ">
                 <!-- Bagian ikon dan nama user -->
-                <div class="flex items-center cursor-pointer" onclick="toggleDropdown()">
+                <div class="flex items-center cursor-pointer hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md" onclick="toggleDropdown()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-user">
@@ -87,7 +102,8 @@
                         <div class="flex pl-2 py-0 hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
                                 <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />

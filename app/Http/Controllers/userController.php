@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -9,18 +10,26 @@ use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
-    // Index Method
+    // Controller UserController
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $datauser = User::all(); // Ambil semua data user
+        $dataorders = Order::all(); // Ambil semua data order
+
+        // Kirimkan jumlahnya ke view
+        return view('admin.dashboard', [
+            'userCount' => $datauser->count(),
+            'orderCount' => $dataorders->count()
+        ]);
     }
+
 
     // Index Method
     public function index()
     {
-        $data = User::get();
+        $datauser = User::get();
 
-        return view('user.user', compact('data'));
+        return view('user.user', compact('datauser'));
     }
 
     // Create Method
@@ -48,7 +57,7 @@ class UserController extends Controller
             ], 422);
         }
 
-        $data = [
+        $datauser = [
             'role' => $request->role, // Menyimpan nilai role
             'name' => $request->nama,
             'email' => $request->email,
@@ -57,7 +66,7 @@ class UserController extends Controller
             'telepon' => $request->telepon,
         ];
 
-        User::create($data);
+        User::create($datauser);
 
         return response()->json(['status' => 'success']);
     }
@@ -67,9 +76,9 @@ class UserController extends Controller
     // Edit Method
     public function edit(Request $request, $id)
     {
-        $data = User::find($id);
+        $datauser = User::find($id);
 
-        return view('user.edit', compact('data'));
+        return view('user.edit', compact('datauser'));
     }
 
     // Update Method
@@ -86,17 +95,17 @@ class UserController extends Controller
 
         if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
 
-        $data['email'] = $request->email;
-        $data['name'] = $request->nama;
-        $data['alamat'] = $request->alamat;
-        $data['telepon'] = $request->telepon;
-        $data['role'] = $request->role;
+        $datauser['email'] = $request->email;
+        $datauser['name'] = $request->nama;
+        $datauser['alamat'] = $request->alamat;
+        $datauser['telepon'] = $request->telepon;
+        $datauser['role'] = $request->role;
 
         if ($request->password) {
-            $data['password'] = Hash::make($request->password);
+            $datauser['password'] = Hash::make($request->password);
         }
 
-        User::whereId($id)->update($data);
+        User::whereId($id)->update($datauser);
 
         return redirect()->route('adminpage.user.index');
     }
@@ -104,10 +113,10 @@ class UserController extends Controller
     // Destroy Method
     public function destroy(Request $request, $id)
     {
-        $data = User::find($id);
+        $datauser = User::find($id);
 
-        if ($data) {
-            $data->delete();
+        if ($datauser) {
+            $datauser->delete();
         }
 
         return redirect()->route('adminpage.user.index');
