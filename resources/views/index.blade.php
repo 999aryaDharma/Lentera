@@ -1,13 +1,10 @@
 <title>Lentera</title>
 
 @extends('layout.navbar')
-
-
 @section('content')
-<div class="mt-28">
 
    <!-- Carousel -->
-   <div id="default-carousel" class="relative  mx-auto max-w-2xl lg:max-w-7xl shadow-md h-80" data-carousel="slide">
+   <div id="default-carousel" class="relative mt-32 mx-auto max-w-2xl lg:max-w-7xl shadow-md h-80" data-carousel="slide">
    <!-- Carousel wrapper -->
       <div class="relative h-80 overflow-hidden rounded-lg md:h-80">
             <!-- item -->
@@ -70,7 +67,7 @@
             <div class="mt-4 flex justify-between">
                <div>
                   <h3 class="text-sm text-gray-700">
-                     <a href="{{route('detail')}}">
+                     <a href="">
                         <span aria-hidden="true" class="absolute inset-0"></span>
                         Basic Tee
                      </a>
@@ -542,5 +539,17 @@
 
    <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   @if ($message = Session::get('success'))
+       <script>
+           Swal.fire({
+               icon: 'success',
+               title: 'Success',
+               text: '{{ $message }}',
+               confirmButtonColor: '#7066E0',
+           });
+       </script>
+   @endif
+</body>
 
    @endsection

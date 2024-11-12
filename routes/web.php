@@ -1,18 +1,42 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('content/index');
-// })->name('lentera');
 
-Route::get('/navbar', function () {
-    return view('navbar');
+// Login Controller
+Route::get('/login', [AuthController::class, 'index'])->name('login');
+Route::post('/loginproses', [AuthController::class, 'loginproses'])->name('login.proses');
+Route::get('/logoutproses', [AuthController::class, 'logoutproses'])->name('logout');
+Route::get('/register', [AuthController::class, 'register'])->name('register');
+Route::post('/registerproses', [AuthController::class, 'registerproses'])->name('register.proses');
+Route::get('/', function() {
+    return view('index');
+})->name('index');
+
+// User Contoller
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::class], 'as' => 'adminpage.'], function(){
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+
+        // User
+        Route::get('/user', [UserController::class, 'index'])->name('user.index');
+        Route::get('/create', [UserController::class, 'create'])->name('user.create');
+        Route::post('/store', [UserController::class, 'store'])->name('user.store');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+        Route::put('/update/{id}', [UserController::class, 'update'])->name('user.update');
+        Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
+
+        // Kategori
+        route::resource('/category', 'App\Http\Controllers\categoryController');
 });
 
-Route::get('/carousel', function () {
-    return view('content/carousel');
-});
+
+
+// Route::get('/carousel', function () {
+//     return view('content/carousel');
+// });
 
 // Route::get('/keranjang', function () {
 //     return view('content/keranjang');
@@ -22,9 +46,9 @@ Route::get('/carousel', function () {
 //     return view('content/detail');
 // })->name('detail');
 
-Route::get('/login', function () {
-    return view('auth/loginpage');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('auth/loginpage');
+// })->name('login');
 
 // Route::get('/register', function () {
 //     return view('auth/registerpage');
@@ -36,26 +60,26 @@ Route::get('/login', function () {
 
 
 // route controller
-route::get('/', 'App\Http\Controllers\productController@index')->name('lentera');
-route::get('/detail', 'App\Http\Controllers\productController@show')->name('detail');
+// route::get('/', 'App\Http\Controllers\productController@index')->name('lentera');
+// route::get('/detail', 'App\Http\Controllers\productController@show')->name('detail');
 
-route::get('/keranjang', 'App\Http\Controllers\keranjangController@index')->name('keranjang');
+// route::get('/keranjang', 'App\Http\Controllers\keranjangController@index')->name('keranjang');
 
-route::get('/register', 'App\Http\Controllers\authController@create')->name('register');
+// route::get('/register', 'App\Http\Controllers\authController@create')->name('register');
 
-route::get('/beli', 'App\Http\Controllers\pembelianController@index')->name('beli');
+// route::get('/beli', 'App\Http\Controllers\pembelianController@index')->name('beli');
 
-route::get('/alamat', 'App\Http\Controllers\alamatController@index')->name('alamat');
+// route::get('/alamat', 'App\Http\Controllers\alamatController@index')->name('alamat');
 
 
 
 // Admin
-route::get('/sidebar', function () {
-    return view('admin.sidebar');
-});
-route::get('/admin', function(){
-    return view('admin.dashboard');
-})->name('admin');
+// route::get('/sidebar', function () {
+//     return view('admin.sidebar');
+// });
+// route::get('/admin', function(){
+//     return view('admin.dashboard');
+// })->name('admin');
 // route::get('/product', function () {
 //     return view('admin.product');
 
@@ -68,14 +92,14 @@ route::get('/admin', function(){
 //     return view('admin.user');
 // });
 
-route::get('/order', function(){
-    return view('admin.orderList');
-})->name('order');
+// route::get('/order', function(){
+//     return view('admin.orderList');
+// })->name('order');
 
 
-route::get('/product', 'App\Http\Controllers\productAdminController@index')->name('productAdmin');
+// route::get('/product', 'App\Http\Controllers\productAdminController@index')->name('productAdmin');
 
 // route::get('/category', 'App\Http\Controllers\categoryController@index')->name('category');
-route::resource('/category', 'App\Http\Controllers\categoryController');
 
-route::get('/user', 'App\Http\Controllers\userController@index')->name('user');
+
+// route::get('/user', 'App\Http\Controllers\userController@index')->name('user');
