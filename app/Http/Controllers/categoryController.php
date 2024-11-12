@@ -40,7 +40,7 @@ class categoryController extends Controller
             'jumlah' => $request->jumlah,
         ]);
 
-        return redirect()->route('category.index');
+        return redirect()->route('adminpage.category.index');
     }
 
     /**
@@ -73,7 +73,7 @@ class categoryController extends Controller
             'jumlah' => $request->jumlah,
         ]);
 
-        return redirect()->route('category.index');
+        return redirect()->route('adminpage.category.index');
     }
 
     /**
@@ -84,6 +84,6 @@ class categoryController extends Controller
         //
         category::where('id', $category->id)->delete(); 
 
-        return redirect()->route('category.index');
+        return redirect()->route('adminpage.category.index');
     }
 }

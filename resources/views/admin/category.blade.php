@@ -15,7 +15,7 @@
             <th class="p-4">Date add</th>
             <th class="p-4">Date update</th>
             <th colspan="2" class="p-4">
-                <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a href="{{route('category.create')}}" class="text-center m-5 text-white">Tambah</a></button>
+                <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a href="{{route('adminpage.category.create')}}" class="text-center m-5 text-white">Tambah</a></button>
             </th>
         </tr>
     </thead>
@@ -29,7 +29,7 @@
             <td class="p-4">{{$k->updated_at}}</td>
             <td class="p-4">
                 <button class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
-                    <a href="{{route('category.edit',[$k->id])}}" class="text-center m-5">
+                    <a href="{{route('adminpage.category.edit',[$k->id])}}" class="text-center m-5">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
@@ -40,7 +40,7 @@
                 </button>
             </td>
             <td class="p-4">
-                <form method="POST" action="{{route('category.destroy',[$k->id])}}" class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
+                <form method="POST" action="{{route('adminpage.category.destroy',[$k->id])}}" class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
 
                     @csrf
                     @method('DELETE')

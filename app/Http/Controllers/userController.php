@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -15,12 +16,14 @@ class UserController extends Controller
     {
         $datauser = User::all(); // Ambil semua data user
         $dataorders = Order::all(); // Ambil semua data order
+        $datacategory = category::all(); // Mengambil semua data category
 
         // Kirimkan jumlahnya ke view
         return view('admin.dashboard', [
             'userCount' => $datauser->count(),
-            'orderCount' => $dataorders->count()
-        ]);
+            'orderCount' => $dataorders->count(),
+            'categoryCount' => $datacategory->count()
+        ], compact('dataorders'));
     }
 
 

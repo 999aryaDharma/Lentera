@@ -41,9 +41,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
 
     
     Route::get('/product', [productAdminController::class, 'index'])->name('product.index');
-    
-    
-    Route::get('/category', [categoryController::class, 'index'])->name('category.index');
+
+
+    // Kategori
+    route::resource('/category', 'App\Http\Controllers\categoryController');
 
 });
 
