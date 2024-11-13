@@ -19,10 +19,10 @@ Route::get('/', function() {
     return view('index');
 })->name('index');
 
-// User Contoller
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::class], 'as' => 'adminpage.'], function(){
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-        
+    
+    // User Contoller
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
@@ -30,18 +30,19 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
     Route::put('/user/update/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/delete/{id}', [UserController::class, 'destroy'])->name('user.delete');
 
-
+    // Order Contoller
     Route::get('/orderlist', [OrderController::class, 'index'])->name('order.index');
     Route::get('/order/create', [OrderController::class, 'create'])->name('order.create');
     Route::post('/order/store', [OrderController::class, 'store'])->name('order.store');
     Route::get('/order/edit/{id}', [OrderController::class, 'edit'])->name('order.edit');
     Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/order/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
+    Route::get('/order/detail/{id}', [OrderController::class, 'showDetail'])->name('order.detail');
 
-    
+    // Product Contoller
     Route::get('/product', [productAdminController::class, 'index'])->name('product.index');
     
-    
+    // User Contoller
     Route::get('/category', [categoryController::class, 'index'])->name('category.index');
 });
 
