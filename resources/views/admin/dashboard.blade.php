@@ -89,7 +89,7 @@
                             <div>
                                 <p class="mb-0 font-sans text-sm font-semibold leading-normal">Products</p>
                                 <h5 class="mb-0 font-bold">
-                                    200 Products
+                                    {{ $productCount }} products
                                 </h5>
                             </div>
                         </div>

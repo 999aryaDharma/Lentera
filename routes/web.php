@@ -39,9 +39,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
     Route::put('/order/update/{id}', [OrderController::class, 'update'])->name('order.update');
     Route::delete('/order/delete/{id}', [OrderController::class, 'destroy'])->name('order.delete');
 
-    
-    Route::get('/product', [productAdminController::class, 'index'])->name('product.index');
 
+    // product
+    route::resource('/product', 'App\Http\Controllers\productController');
 
     // Kategori
     route::resource('/category', 'App\Http\Controllers\categoryController');
