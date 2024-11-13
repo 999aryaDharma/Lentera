@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\category;
+use App\Models\product;
 use Faker\Guesser\Name;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class productController extends Controller
 {
@@ -13,7 +16,8 @@ class productController extends Controller
     public function index()
     {
         //
-        return view('index');
+        $products = product::all();
+        return view('admin.product', compact('products'));
     }
 
     /**
@@ -22,6 +26,8 @@ class productController extends Controller
     public function create()
     {
         //
+        $categories = category::all();
+        return view('admin.createProduct', compact('categories'));
     }
 
     /**
@@ -29,7 +35,47 @@ class productController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $validator = Validator::make($request->all(), [
+            'product' => 'required|string',
+            'category_id' => 'required|exists:categories,id',
+            'size' => 'required|string',
+            'warna' => 'required|string',
+            'deskripsi' => 'required|string',
+            'harga' => 'required|string',
+            'stok' => 'required|string',
+            'image' => 'required|image',   
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        
+
+        $data = product::create([
+            'product' => $request->product,
+            'category_id' => $request->category_id,
+            'size' => $request->size,
+            'warna' => $request->warna,
+            'deskripsi' => $request->deskripsi,
+            'harga' => $request->harga,
+            'stok' => $request->stok,
+            'image' => $request->image,
+        ]);
+
+        // $image = time() . '.' . $request->image->extension();
+        // $request->image->move(public_path('images'), $image);
+        
+
+
+        if ($request->hasFile('image')) {
+            $request->file('image')->move(public_path('image'), $request->file('image')->getClientOriginalName());
+            $data->image = $request->file('image')->getClientOriginalName();
+            $data->save();
+        }
+
+        return redirect()->route('adminpage.product.index')->with('success', 'Product created successfully');
     }
 
     /**
@@ -38,7 +84,7 @@ class productController extends Controller
     public function show() //(string $id)
     {
         //
-        return view('detail');
+        // return view('detail');
     }
 
     /**
