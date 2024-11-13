@@ -21,13 +21,8 @@ Route::get('/', function() {
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::class], 'as' => 'adminpage.'], function(){
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
-<<<<<<< HEAD
     
     // User Contoller
-=======
-
-        
->>>>>>> a515618e4c5bef94f86218c4d9447020aab2abfd
     Route::get('/user', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
@@ -46,17 +41,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
 
     // Product Contoller
     Route::get('/product', [productAdminController::class, 'index'])->name('product.index');
-<<<<<<< HEAD
     
     // User Contoller
     Route::get('/category', [categoryController::class, 'index'])->name('category.index');
-=======
-
-
-    // Kategori
-    route::resource('/category', 'App\Http\Controllers\categoryController');
-
->>>>>>> a515618e4c5bef94f86218c4d9447020aab2abfd
 });
 
 
