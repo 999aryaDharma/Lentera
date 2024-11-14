@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\productAdminController;
+use App\Http\Controllers\productController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
@@ -15,9 +16,11 @@ Route::post('/loginproses', [AuthController::class, 'loginproses'])->name('login
 Route::get('/logoutproses', [AuthController::class, 'logoutproses'])->name('logout');
 Route::get('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/registerproses', [AuthController::class, 'registerproses'])->name('register.proses');
-Route::get('/', function() {
-    return view('index');
-})->name('index');
+
+// halaman customer
+route::get('/', [productController::class, 'web'])->name('index');
+route::get('/detail/{id}', [productController::class, 'show'])->name('detail');
+// route::resource('/detail', 'App\Http\Controllers\productController');
 
 // User Contoller
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::class], 'as' => 'adminpage.'], function(){

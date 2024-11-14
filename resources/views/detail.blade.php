@@ -4,25 +4,13 @@
 @section('content')
 <div class="flex font-sans mt-28 mb-14 mx-44  ">
    <div class="flex-none h-96 w-96 relative group  border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg ">
-      <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" class="absolute  inset-0 w-full h-full object-cover" loading="lazy" />
-      <div class="absolute w-20 h-20 -bottom-24 group  border-2 p-2 shadow-md shadow-indigo-500/40 rounded-lg">
-         <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" class="w-16 h-16" loading="lazy" />
-      </div>
-      <div class="absolute w-20 h-20 ml-24 -bottom-24 group  border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg">
-         <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" class="w-16 h-16" loading="lazy" />
-      </div>
-      <div class="absolute  w-20 h-20 ml-48 -bottom-24 group border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg">
-         <img class="w-16 h-16" src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" loading="lazy" />
-      </div>
-      <div class="absolute w-20 h-20 ml-72 -bottom-24 group border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg">
-         <img src="https://tailwindui.com/plus/img/ecommerce-images/product-page-01-related-product-01.jpg" alt="" class="w-16 h-16" loading="lazy" />
-      </div>
+      <img src="{{ asset('/image/' .$dataproduct->image) }}" alt="" class="absolute  inset-0 w-full h-full object-cover" loading="lazy" />
    </div>
 
    <form class="flex-auto p-10 ml-20 ">
       <div class="">
          <h1 class="flex-auto text-4xl -mt-10 font-bold text-slate-900">
-            Classic Utility Jacket
+            {{$dataproduct->product}}
          </h1>
          <div class="text-lg font-semibold text-slate-500 mt-6 ">
             <p>Rp.500.000</p>
@@ -65,31 +53,11 @@
             </label>
          </div>
       </div>
-      <!-- <div class="flex space-x-4 mb-6 text-sm font-medium">
-         <div class="flex-auto flex space-x-4">
-            <button class="h-10 px-6 font-semibold rounded-md border border-slate-200 bg-indigo-500/90 text-white hover:bg-white hover:text-indigo-500/90 " type="submit">
-          Buy now
-        </button>
-            <button class="h-10 px-6 font-semibold rounded-md border border-slate-200 text-indigo-500/90 hover:bg-indigo-500/90 hover:text-white" type="button">
-               Add to Cart
-            </button>
-         </div>
-         <button class="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200" type="button" aria-label="Like">
-        <svg width="20" height="20" fill="currentColor" aria-hidden="true">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
-        </svg>
-      </button>
-      </div> -->
+
       <p class="text-lg text-slate-700">
          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error saepe magnam, modi odit labore officia natus. Cum laudantium aperiam, cumque esse natus, alias blanditiis facilis omnis ex consectetur fugiat quaerat distinctio asperiores dolorem dolore repellendus sint ratione earum labore suscipit
          eygfyegfyge feuwgyfeg egywgfyew. <br><a class="readmore text-indigo-500/90">Read More </a>
-      <!-- <div class="message text-lg">
-         To give an attractive look to web sites, styles are heavily used.
-         JQuery is a powerful JavaScript library that allows us to add dynamic elements to our web
-         sites. Not only it is easy to learn, but it's easy to implement too. A person must have a
-         good knowledge of HTML and CSS and a bit of JavaScript. jQuery is an open source project
-         that provides a wide range of features with cross-platform compatibility. <br><a class="hide text-indigo-500/90">Hide</a>
-      </div> -->
+
       </p>
    </form>
 </div>
@@ -169,7 +137,7 @@
          </div>
          <p class="text-gray-800 text-2xl font-semibold mt-4">Rp500.000</p>
          <div class="flex space-x-4 mt-4">
-            <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"><a href="{{route('beli')}}">Beli</a></button>
+            <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"><a href="">Beli</a></button>
             <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">+ Keranjang</button>
          </div>
          <div class="flex items-center space-x-4 text-gray-500 text-sm mt-4">

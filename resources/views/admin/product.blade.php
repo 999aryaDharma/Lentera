@@ -60,7 +60,7 @@
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a
-                                                href="{{ route('adminpage.order.create') }}"
+                                                href="{{ route('adminpage.product.create') }}"
                                                 class="text-center m-5 text-white">Tambah</a></button>
                                     </th>
                                 </tr>

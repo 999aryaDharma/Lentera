@@ -20,7 +20,7 @@
     <nav
         class="h-20 shadow-md shadow-indigo-500/40 fixed w-full top-0 bg-white flex justify-around place-items-center z-50">
         <div>
-            <a href="" class="text-white"><img src="img/logo.png" alt="logo" class="h-20"></a>
+            <a href="" class="text-white"><img src="/img/logo.png" alt="logo" class="h-20"></a>
         </div>
 
         <form class="w-3/5">

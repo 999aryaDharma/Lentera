@@ -13,6 +13,11 @@ class productController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function web(){
+        $dataproduct = product::all();
+        return view('index', compact('dataproduct'));
+    }
+
     public function index()
     {
         //
@@ -81,10 +86,12 @@ class productController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show() //(string $id)
+    public function show(product $product)
     {
         //
-        // return view('detail');
+        $dataproduct = $product;
+        
+        return view('detail', compact('dataproduct'));
     }
 
     /**
