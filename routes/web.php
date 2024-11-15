@@ -19,7 +19,10 @@ Route::post('/registerproses', [AuthController::class, 'registerproses'])->name(
 
 // halaman customer
 route::get('/', [productController::class, 'web'])->name('index');
-route::get('/detail/{id}', [productController::class, 'show'])->name('detail');
+
+route::get('/detail/{product}', [productController::class, 'show'])->name('detail');
+// route::resource('/detail', 'App\Http\Controllers\productController');
+
 // route::resource('/detail', 'App\Http\Controllers\productController');
 
 // User Contoller

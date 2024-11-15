@@ -4,16 +4,16 @@
 @section('content')
 <div class="flex font-sans mt-28 mb-14 mx-44  ">
    <div class="flex-none h-96 w-96 relative group  border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg ">
-      <img src="{{ asset('/image/' .$dataproduct->image) }}" alt="" class="absolute  inset-0 w-full h-full object-cover" loading="lazy" />
+      <img src="/images/{{$data->image}}" alt="" class="absolute  inset-0 w-full h-full object-cover" loading="lazy" />
    </div>
 
    <form class="flex-auto p-10 ml-20 ">
       <div class="">
          <h1 class="flex-auto text-4xl -mt-10 font-bold text-slate-900">
-            {{$dataproduct->product}}
+            {{$data->product}}
          </h1>
          <div class="text-lg font-semibold text-slate-500 mt-6 ">
-            <p>Rp.500.000</p>
+            <p>{{ number_format($data->harga, 2, ',', '.') }}</p>
          </div>
          <div class="w-full flex-none text-sm font-medium text-slate-700 mt-6">
             In stock
@@ -24,39 +24,13 @@
             <label>
                <input class="sr-only peer" name="size" type="radio" value="xs" checked />
                <div class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-indigo-500/90 peer-checked:text-white">
-                  XS
+                  {{$data->size}}
                </div>
-            </label>
-            <label>
-               <input class="sr-only peer" name="size" type="radio" value="s" />
-               <div class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-indigo-500/90 peer-checked:text-white">
-                  S
-               </div>
-            </label>
-            <label>
-               <input class="sr-only peer" name="size" type="radio" value="m" />
-               <div class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-indigo-500/90 peer-checked:text-white">
-                  M
-               </div>
-            </label>
-            <label>
-               <input class="sr-only peer" name="size" type="radio" value="l" />
-               <div class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-indigo-500/90 peer-checked:text-white">
-                  L
-               </div>
-            </label>
-            <label>
-               <input class="sr-only peer" name="size" type="radio" value="xl" />
-               <div class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-indigo-500/90 peer-checked:text-white">
-                  XL
-               </div>
-            </label>
          </div>
       </div>
 
       <p class="text-lg text-slate-700">
-         Lorem ipsum dolor sit amet consectetur adipisicing elit. Error saepe magnam, modi odit labore officia natus. Cum laudantium aperiam, cumque esse natus, alias blanditiis facilis omnis ex consectetur fugiat quaerat distinctio asperiores dolorem dolore repellendus sint ratione earum labore suscipit
-         eygfyegfyge feuwgyfeg egywgfyew. <br><a class="readmore text-indigo-500/90">Read More </a>
+         {{$data->deskripsi}}
 
       </p>
    </form>
@@ -133,9 +107,9 @@
             <button class="bg-gray-200 px-3 py-1 rounded-l-lg">-</button>
             <input type="text" value="1" class="w-12 text-center border-gray-300 border-t border-b">
             <button class="bg-gray-200 px-3 py-1 rounded-r-lg">+</button>
-            <span class="text-gray-500 ml-4">Stok Total: 983</span>
+            <span class="text-gray-500 ml-4">Stok Total: {{$data->stok}}</span>
          </div>
-         <p class="text-gray-800 text-2xl font-semibold mt-4">Rp500.000</p>
+         <p class="text-gray-800 text-2xl font-semibold mt-4">{{ number_format($data->harga, 2, ',', '.') }}</p>
          <div class="flex space-x-4 mt-4">
             <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"><a href="">Beli</a></button>
             <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">+ Keranjang</button>

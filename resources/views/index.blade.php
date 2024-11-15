@@ -64,12 +64,12 @@
 
       <div class="group relative border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg max-w-60 max-h-72">
          <div class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 max-h-52">
-            <img src="{{ asset('/image/' .$product->image) }}" alt="Front of men&#039;s Basic Tee in black." class="max-h-52 max-w-52 object-cover object-center lg:h-full lg:w-full">
+            <img src="images/{{$product->image}}" alt="Front of men&#039;s Basic Tee in black." class="max-h-52 max-w-52 object-cover object-center lg:h-full lg:w-full">
          </div>
          <div class="mt-4 flex justify-between">
             <div>
                <h3 class="text-sm text-gray-700">
-                  <a href="{{route('detail',[$product->id])}}">
+                  <a href="{{ route('detail', [$product->id]) }}">
                      <span aria-hidden="true" class="absolute inset-0"></span>
                      {{$product->product}}
                   </a>

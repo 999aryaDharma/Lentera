@@ -56,9 +56,11 @@ class productController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        
 
-        $data = product::create([
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+
+        product::create([
             'product' => $request->product,
             'category_id' => $request->category_id,
             'size' => $request->size,
@@ -66,19 +68,18 @@ class productController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'stok' => $request->stok,
-            'image' => $request->image,
+            'image' => $imageName,
         ]);
 
-        // $image = time() . '.' . $request->image->extension();
-        // $request->image->move(public_path('images'), $image);
+        
         
 
 
-        if ($request->hasFile('image')) {
-            $request->file('image')->move(public_path('image'), $request->file('image')->getClientOriginalName());
-            $data->image = $request->file('image')->getClientOriginalName();
-            $data->save();
-        }
+        // if ($request->hasFile('image')) {
+        //     $request->file('image')->move(public_path('image'), $request->file('image')->getClientOriginalName());
+        //     $data->image = $request->file('image')->getClientOriginalName();
+        //     $data->save();
+        // }
 
         return redirect()->route('adminpage.product.index')->with('success', 'Product created successfully');
     }
@@ -88,18 +89,28 @@ class productController extends Controller
      */
     public function show(product $product)
     {
-        //
-        $dataproduct = $product;
+        // dd($product);
+        // //
+        // $categories = category::all();
+        $data = $product;
+        // $data = product::with('category')->find('id');
+    
         
-        return view('detail', compact('dataproduct'));
+        return view('detail', compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(product $product)
     {
         //
+        // $product = product::with('category')->find('id');
+        // dd($product);
+        $categories = category::all();
+        $data = $product;
+
+        return view('admin.editProduct', compact('data', 'categories'));
     }
 
     /**
