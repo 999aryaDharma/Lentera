@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\category;
 use App\Models\product;
 use Faker\Guesser\Name;
+use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -116,9 +117,55 @@ class productController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $product)
     {
-        //
+        // category::where('id', $category->id)->update([
+        //     'category' => $request->category,
+        //     'jumlah' => $request->jumlah,
+        // ]);
+        // return redirect()->route('adminpage.category.index');
+
+        // $validator = Validator::make($request->all(), [
+        //     'product' => 'required',
+        //     'category_id' => 'required',
+        //     'size' => 'required',
+        //     'warna' => 'required',
+        //     'deskripsi' => 'required',
+        //     'harga' => 'required',
+        //     'stok' => 'required',
+        //     'image' => 'required',
+        // ]);
+
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withErrors($validator)->withInput();
+        // }
+        $validator = Validator::make($request->all(), [
+            'product' => 'required',
+            'image' => 'required',
+        ]);
+
+        if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+
+        $products['product'] = $request->product;
+        $products['image'] = $imageName;
+
+        product::where('id', $product)->update($products);
+        // product::where('id', $product->id)->update([
+        //     'product' => $request->product,
+        //     'category_id' => $request->category_id,
+        //     'size' => $request->size,
+        //     'warna' => $request->warna,
+        //     'deskripsi' => $request->deskripsi,
+        //     'harga' => $request->harga,
+        //     'stok' => $request->stok,
+        //     'image' => $request->image,
+        // ]);  
+
+        return redirect()->route('adminpage.product.index');
     }
 
     /**

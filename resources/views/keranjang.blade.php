@@ -202,7 +202,7 @@
             <p>Total</p>
             <p>Rp. 100.000</p>
         </div>
-        <a href="{{route('beli')}}">
+        <a href="">
             <button type="submit" class="w-full bg-indigo-500/90 rounded-lg text-white hover:bg-indigo-700">
                 <h1 class="p-3">Beli Langsung</h1>
             </button>

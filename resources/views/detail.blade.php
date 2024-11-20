@@ -112,7 +112,7 @@
          <p class="text-gray-800 text-2xl font-semibold mt-4">{{ number_format($data->harga, 2, ',', '.') }}</p>
          <div class="flex space-x-4 mt-4">
             <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"><a href="">Beli</a></button>
-            <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">+ Keranjang</button>
+            <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg"><a href="{{route('keranjang.index')}}">+ Keranjang </a></button>
          </div>
          <div class="flex items-center space-x-4 text-gray-500 text-sm mt-4">
             <span>💬 Chat</span>

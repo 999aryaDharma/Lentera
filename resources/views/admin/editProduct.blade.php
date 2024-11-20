@@ -20,7 +20,7 @@
         <div class="shadow-lg rounded-xl overflow-hidden">
             <div class="p-6">
                 <h2 class="text-xl font-medium text-center text-gray-900 mb-6">Edit Product</h2>
-                <form action="{{ route('adminpage.product.store') }}" method="POST" data-redirect-route="/admin/product" class="space-y-4" enctype="multipart/form-data">
+                <form action="{{route('adminpage.product.update',[$data->id])}}" method="POST" data-redirect-route="/admin/product" class="space-y-4" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -131,11 +131,12 @@
 
                         @enderror
 
+
                     </div>
 
 
                     <hr class="mx-8 h-0.5 bg-gray-500" />
-                    <button type="submit" id="create" class="w-full btn bg-indigo-500/90 rounded-lg hover:bg-indigo-700 text-white p-2">
+                    <button type="submit" id="update" class="w-full btn bg-indigo-500/90 rounded-lg hover:bg-indigo-700 text-white p-2">
                         Edit Product Product
                     </button>
                 </form>

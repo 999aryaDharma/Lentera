@@ -21,6 +21,10 @@ Route::post('/registerproses', [AuthController::class, 'registerproses'])->name(
 route::get('/', [productController::class, 'web'])->name('index');
 
 route::get('/detail/{product}', [productController::class, 'show'])->name('detail');
+
+// Keranjang
+Route::resource('/keranjang', 'App\Http\Controllers\keranjangController');
+
 // route::resource('/detail', 'App\Http\Controllers\productController');
 
 // route::resource('/detail', 'App\Http\Controllers\productController');
@@ -47,10 +51,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
 
 
     // product
-    route::resource('/product', 'App\Http\Controllers\productController');
+    Route::resource('/product', 'App\Http\Controllers\productController');
 
     // Kategori
-    route::resource('/category', 'App\Http\Controllers\categoryController');
+    Route::resource('/category', 'App\Http\Controllers\categoryController');
 
 });
 
