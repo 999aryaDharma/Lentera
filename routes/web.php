@@ -20,6 +20,8 @@ Route::post('/registerproses', [AuthController::class, 'registerproses'])->name(
 // halaman customer
 route::get('/', [productController::class, 'web'])->name('index');
 
+// route::get('/detail', [productController::class, 'web'])->name('index');
+
 route::get('/detail/{product}', [productController::class, 'show'])->name('detail');
 
 // Keranjang
