@@ -2,11 +2,13 @@
 <html lang="en">
 
 <head>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     @vite('resources/css/app.css')
     <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.0/dist/sweetalert2.min.css" rel="stylesheet">
 
     <style>
         /* Animasi rotasi untuk ikon */
@@ -14,16 +16,18 @@
             transform: rotate(180deg);
         }
     </style>
+
 </head>
 
 <body>
     <nav
         class="h-20 shadow-md shadow-indigo-500/40 fixed w-full top-0 bg-white flex justify-around place-items-center z-50">
-        <div>
-            <a href="" class="text-white"><img src="img/logo.png" alt="logo" class="h-20"></a>
+        <div class="mx-4 ml-12">
+            <a href="" class="text-white"><img src="{{ asset('img/logo.png') }}" alt="logo"
+                    class="h-20"></a>
         </div>
 
-        <form class="w-3/5">
+        <form class="w-3/5 px-3 mb-4">
             <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -39,9 +43,18 @@
             </div>
         </form>
 
-        <div class="flex gap-7">
-            <a href="">
-                <div class=" hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
+        <div class="flex">
+            @if (auth()->check() && auth()->user()->carts()->count() > 0)
+                <div
+                    class="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform translate-x-2 -translate-y-2">
+                    {{ auth()->user()->carts()->count() }}
+                </div>
+            @endif
+
+
+            <a href="{{ route('cart.index') }}">
+                <div
+                    class="flex transition-background duration-300 ease-in-out hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
@@ -51,33 +64,25 @@
                         <path d="M17 17h-11v-14h-2" />
                         <path d="M6 5l14 1l-1 7h-13" />
                     </svg>
+                    <span>Cart</span>
                 </div>
             </a>
-            <a href="">
-                <div class=" hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-bag">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path
-                            d="M6.331 8h11.339a2 2 0 0 1 1.977 2.304l-1.255 8.152a3 3 0 0 1 -2.966 2.544h-6.852a3 3 0 0 1 -2.965 -2.544l-1.255 -8.152a2 2 0 0 1 1.977 -2.304z" />
-                        <path d="M9 11v-5a3 3 0 0 1 6 0v5" />
-                    </svg>
-                </div>
-            </a>
+
         </div>
         @guest
-            <div class="justify-between">
-                <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a href="{{ route('login') }}"
-                        class="text-center m-5 text-white">Masuk</a></button>
+            <div class="flex justify-between gap-1 mx-1">
                 <button
-                    class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white"><a
+                    class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700 transition-background duration-300 ease-in-out"><a
+                        href="{{ route('login') }}" class="text-center m-5 text-white">Masuk</a></button>
+                <button
+                    class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white transition-background duration-300 ease-in-out"><a
                         href="{{ route('register') }}" class="text-center m-5 ">Daftar</a></button>
             </div>
         @else
-            <div class="relative ">
+            <div class="relative mr-16">
                 <!-- Bagian ikon dan nama user -->
-                <div class="flex items-center cursor-pointer hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md" onclick="toggleDropdown()">
+                <div class="flex items-center cursor-pointer transition-background duration-300 ease-in-out hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md"
+                    onclick="toggleDropdown()">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="icon icon-tabler icons-tabler-outline icon-tabler-user">
@@ -95,15 +100,14 @@
                     </svg>
                 </div>
 
-                <!-- Dropdown -->
+                <!-- User Dropdown -->
                 <div id="dropdownMenu"
                     class="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 transform scale-95 transition-all duration-200 ease-out hidden">
                     @if (Auth::user()->role == 'admin')
                         <div class="flex pl-2 py-0 hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round"
-                                class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
+                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
                                 <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
@@ -127,14 +131,13 @@
                     </div>
                 </div>
             </div>
-
         @endguest
     </nav>
 
     @yield('content')
 
     <!-- foooter -->
-    <footer class=" inset-x-0 bottom-0 border-t-2 border-indigo-500/40 bg-indigo-800 mt-24 text-white">
+    <footer class="border-t-2 border-indigo-500/40 bg-indigo-800 mt-24 text-white">
         <div class=" w-1/3 mx-10 py-10">
             <img src="img/logo.png" alt="" class="h-28">
             <p class="py-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe officiis rem dolorum illum
@@ -182,7 +185,7 @@
             </div>
         </div>
     </footer>
-
+    {{-- User DropDown --}}
     <script>
         function toggleDropdown() {
             const dropdown = document.getElementById('dropdownMenu');
@@ -221,6 +224,15 @@
         });
     </script>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

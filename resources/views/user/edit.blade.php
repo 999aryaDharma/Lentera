@@ -17,7 +17,7 @@
                             </button>
                         </a>
                     </div>
-                    <form action="{{ route('adminpage.user.update', ['id' => $datauser->id]) }}" method="POST"
+                    <form action="{{ route('adminpage.user.update', [$datauser->id]) }}" method="POST"
                         class="space-y-4 px-3">
                         @csrf
                         @method('PUT')

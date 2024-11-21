@@ -1,7 +1,7 @@
 @extends('layout.sidebar')
 
 @section('title')
-<h3 class="ml-4">Manage Product</h3>
+<h3 class="ml-4">Manage Event Carousels</h3>
 @endsection
 
 @section('admin')
@@ -12,9 +12,8 @@
         <div class="flex-none w-full max-w-full px-3">
             <div
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-                
                 <div class="flex p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6>Product table</h6>
+                    <h6>Carousels table</h6>
                     <div class="flex items-center md:ml-auto md:pr-4">
                         <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
                             <span
@@ -27,8 +26,6 @@
                         </div>
                     </div>
                 </div>
-                
-                
                 <div class="flex-auto px-0 pt-0 pb-2">
                     <div class="p-0 overflow-x-auto">
                         <table class="items-center w-full px-2 mb-0 align-top border-gray-200 text-slate-500">
@@ -40,103 +37,46 @@
                                     </th>
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                        Product
+                                        Title
                                     </th>
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                        Category
-                                    </th>
-                                    <th
-                                        class="py-3 px-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                        Size
-                                    </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
-                                        Warna
-                                    </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
-                                        Deskripsi
-                                    </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
-                                        Harga
-                                    </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
-                                        Stok
-                                    </th>
-
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
                                         Image
                                     </th>
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a
-                                                href="{{ route('adminpage.product.create') }}"
+                                                href="{{ route('adminpage.carousel.create') }}"
                                                 class="text-center m-5 text-white">Tambah</a></button>
                                     </th>
                                 </tr>
                             </thead>
-                            @foreach ($products as $product)
                             <tbody class="">
+                                @foreach ($carousels as $item)
                                 <tr>
                                     <td
                                         class="px-3 text-center align-middle border-b whitespace-nowrap shadow-transparent">
                                         <span
-                                            class="text-xs font-semibold leading-tight text-slate-400">{{ $product->id }}</span>
+                                            class="text-xs font-semibold leading-tight text-slate-400">{{ $loop->iteration }}</span>
                                     </td>
 
                                     <td
                                         class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
                                         <span
-                                            class="text-sm font-semibold leading-normal text-gray-900">{{ $product->name }}</span>
-                                    </td>
-
-                                    <td
-                                        class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-tight text-slate-400">{{ $product->category->category }}</span>
-                                    </td>
-
-                                    <td
-                                        class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-tight text-slate-400">{{ $product->size }}</span>
-                                    </td>
-                                    <td
-                                        class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-tight text-slate-400">{{ $product->warna }}</span>
+                                            class="text-sm font-semibold leading-normal text-gray-900">{{ $item->title }}</span>
                                     </td>
 
                                     <td
                                         class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
-                                        <p class="mb-0 text-sm font-semibold leading-tight break-words max-w-xs">{{ $product->deskripsi }}
-                                        </p>
-                                    </td>
-                                    <td
-                                        class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-tight text-slate-400">{{ number_format($product->harga, 2, ',', '.') }}</span>
-                                    </td>
-                                    <td
-                                        class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-tight text-slate-400">{{ $product->stok}}</span>
-                                    </td>
-                                    <td
-                                        class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-tight text-slate-400 grid place-content-center"><img src="{{ asset($product->image) }}" alt="" class="h-20"></span>
+                                        <span class="text-sm font-semibold leading-tight text-slate-400 grid place-content-center">
+                                            <img src="{{ asset($item->image) }}" alt="" class="h-24"></span>
                                     </td>
 
                                     <td class="py-8 text-center border-b flex justify-center space-x-1">
                                         {{-- Edit Button --}}
                                         <button
                                             class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
-                                            <a href="{{ route('adminpage.product.edit', [$product->id]) }}" class="text-center m-1">
+                                            <a href="{{ route('adminpage.carousel.edit', ['id'=>$item->id]) }}" class="text-center m-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -152,8 +92,7 @@
                                             </a>
                                         </button>
 
-                                        <form action="{{ route('adminpage.product.destroy', [$product->id]) }}"
-                                            method="POST">
+                                        <form action="{{ route('adminpage.carousel.destroy', ['id'=>$item->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" id="delete"
@@ -176,8 +115,8 @@
                                         </form>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
-                            @endforeach
                         </table>
                     </div>
                 </div>
@@ -185,6 +124,4 @@
         </div>
     </div>
 </div>
-
-
-@endsection 
+@endsection

@@ -10,7 +10,7 @@
     <!-- Main Styling -->
     @vite('resources/css/app.css')
     <link href="{{ asset('assets/css/soft-ui-dashboard-tailwind.css?v=1.0.5') }}" rel="stylesheet" />
-    <title>sidebar</title>
+    <title>Admin Page</title>
 </head>
 
 <body class="bg-gray-200">
@@ -29,6 +29,7 @@
 
         <div class="items-center block w-auto max-h-screen overflow-auto grow basis-full">
             <ul class="flex flex-col pl-0 mb-0">
+                
                 <li class="w-full mt-4">
                     <h6 class="pl-6 ml-2 text-white text-xs font-bold leading-tight uppercase opacity-60">Interface
                         pages</h6>
@@ -60,8 +61,9 @@
                         <div
                             class="{{ request()->routeIs('adminpage.user.index') ? 'bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl' : '' }} mr-2 flex h-10 w-10 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5 group-hover:bg-gradient-to-tl group-hover:from-purple-700 group-hover:to-pink-500 ">
                             <!-- Logo Place -->
-                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none"
+                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none"
                                 stroke="{{ request()->routeIs('adminpage.user.index') ? 'white' : 'currentColor' }}"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="icon icon-tabler icons-tabler-outline icon-tabler-users ">
@@ -83,8 +85,9 @@
                         <div
                             class="{{ request()->routeIs('adminpage.order.index') ? 'bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl' : '' }} mr-2 flex h-10 w-10 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5 group-hover:bg-gradient-to-tl group-hover:from-purple-700 group-hover:to-pink-500">
                             <!-- Logo Place -->
-                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none"
+                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none"
                                 stroke="{{ request()->routeIs('adminpage.order.index') ? 'white' : 'currentColor' }}"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-list">
@@ -109,8 +112,9 @@
                         <div
                             class="{{ request()->routeIs('adminpage.product.index') ? 'bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl' : '' }} mr-2 flex h-10 w-10 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5 group-hover:bg-gradient-to-tl group-hover:from-purple-700 group-hover:to-pink-500">
                             <!-- Logo Place -->
-                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24" fill="none"
+                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none"
                                 stroke="{{ request()->routeIs('adminpage.product.index') ? 'white' : 'currentColor' }}"
                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                                 class="icon icon-tabler icons-tabler-outline icon-tabler-package">
@@ -132,8 +136,8 @@
                         <div
                             class="{{ request()->routeIs('adminpage.category.index') ? 'bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl' : '' }} mr-2 flex h-10 w-10 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5 group-hover:bg-gradient-to-tl group-hover:from-purple-700 group-hover:to-pink-500">
                             <!-- Logo Place -->
-                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height="24" viewBox="0 0 24 24"
+                            <svg class="w-28 h-28 text-indigo-950 group-hover:text-white"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="{{ request()->routeIs('adminpage.category.index') ? 'white' : 'currentColor' }}"
                                 class="icon icon-tabler icons-tabler-filled icon-tabler-category">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -147,6 +151,28 @@
                             </svg>
                         </div>
                         <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Category</span>
+                    </a>
+                </li>
+
+                <li class="mt-0.5 w-full">
+                    <a class="py-2.7 px-2 text-sm text-white ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap transition-colors {{ request()->routeIs('adminpage.carousel.index') ? 'bg-white font-semibold text-black shadow-soft-xl' : '' }} group hover:bg-white hover:text-black rounded-lg "
+                        href="{{ route('adminpage.carousel.index') }}">
+                        <div
+                            class="{{ request()->routeIs('adminpage.carousel.index') ? 'bg-gradient-to-tl from-purple-700 to-pink-500 shadow-soft-2xl' : '' }} mr-2 flex h-10 w-10 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5 group-hover:bg-gradient-to-tl group-hover:from-purple-700 group-hover:to-pink-500">
+                            <!-- Logo Place -->
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                viewBox="0 0 24 24" fill="none"
+                                stroke="{{ request()->routeIs('adminpage.carousel.index') ? 'white' : 'currentColor' }}"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="w-28 h-28 icon icon-tabler icons-tabler-outline icon-tabler-carousel-horizontal text-indigo-950 group-hover:text-white">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path
+                                    d="M7 5m0 1a1 1 0 0 1 1 -1h8a1 1 0 0 1 1 1v12a1 1 0 0 1 -1 1h-8a1 1 0 0 1 -1 -1z" />
+                                <path d="M22 17h-1a1 1 0 0 1 -1 -1v-8a1 1 0 0 1 1 -1h1" />
+                                <path d="M2 17h1a1 1 0 0 0 1 -1v-8a1 1 0 0 0 -1 -1h-1" />
+                            </svg>
+                        </div>
+                        <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Carousels</span>
                     </a>
                 </li>
 
@@ -175,7 +201,7 @@
                         <span class="ml-1 duration-300 opacity-100 pointer-events-none ease-soft">Logout</span>
                     </a>
                 </li>
-                
+
                 <li class="mt-0.5 w-full">
                     <a class="py-2.7 px-2 text-sm text-white ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap transition-all duration-100 rounded-lg group hover:bg-white hover:text-black"
                         href="{{ route('index') }}">
@@ -213,21 +239,19 @@
 
                 <div class="flex items-center mt-2 grow sm:mt-0 sm:mr-6 md:mr-0 lg:flex lg:basis-auto">
                     <div class="flex items-center md:ml-auto md:pr-4">
-                        <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
-                            <span
-                                class="text-sm ease-soft leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
-                                <i class="fas fa-search"></i>
-                            </span>
-                            <input type="text"
-                                class="pl-8.75 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-2 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
-                                placeholder="Type here..." />
-                        </div>
                     </div>
                     <ul class="flex flex-row justify-end pl-0 mb-0 list-none md-max:w-full">
                         <li class="flex items-center">
                             <a href=""
                                 class="block px-0 py-2 text-sm font-semibold transition-all ease-nav-brand text-slate-500">
-                                <i class="fa fa-user sm:mr-1"></i>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="currentColor"
+                                    class="icon icon-tabler icons-tabler-filled icon-tabler-user">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M12 2a5 5 0 1 1 -5 5l.005 -.217a5 5 0 0 1 4.995 -4.783z" />
+                                    <path
+                                        d="M14 14a5 5 0 0 1 5 5v1a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2v-1a5 5 0 0 1 5 -5h4z" />
+                                </svg>
                                 <span class="hidden sm:inline">{{ Auth::user()->name }}</span>
                             </a>
                         </li>
