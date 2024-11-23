@@ -96,8 +96,7 @@
                                         <td
                                             class="p-4 text-center  border-b flex justify-center gap-2">
                                             {{-- Edit Button --}}
-                                            <button
-                                                class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
+                                            <button class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
                                                 <a href="{{ route('adminpage.user.edit', [$d->id]) }}"
                                                     class="text-center m-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"

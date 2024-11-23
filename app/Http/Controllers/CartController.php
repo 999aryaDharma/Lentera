@@ -11,18 +11,19 @@ class CartController extends Controller
     public function index()
     {
         $carts = Cart::where('user_id', Auth::user()->id)->get();
-        return view('keranjang', compact('carts'));
+        $total = $carts->sum(function ($cart) {
+            return $cart->qty * $cart->product->harga;
+        });
+        
+        return view('keranjang', compact('carts', 'total'));
+        
     }
 
     public function store(Request $request)
     {
-        // Periksa apakah produk sudah ada di cart user yang sedang login
-        $duplicate = Cart::where('product_id', $request->product_id)
-                         ->where('user_id', Auth::id()) // Hanya cek untuk user yang login
-                         ->first();
-    
-        if ($duplicate) {
-            return redirect()->route('cart.index')->with('failed', 'This product is already in your cart');
+        $duplicate = Cart::where('product_id', $request->product_id)->first();
+        if ($duplicate){
+            return redirect()->route('cart.index')->with('failed', 'Your products is already in your Cart');
         }
     
         // Tambahkan ke cart
@@ -48,17 +49,16 @@ class CartController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Update quantity berdasarkan ID cart
-        $cart = Cart::where('id', $id)->first();
-        
-        if ($cart) {
-            $cart->qty = $request->quantity;
-            $cart->save(); // Simpan perubahan quantity
+        $request->validate([
+            'qty' => 'required|integer|min:1', // Validasi input
+        ]);
     
-            return redirect()->route('cart.index');
-        }
+        $cart = Cart::findOrFail($id); // Cari data cart berdasarkan ID
+        $cart->qty = $request->qty; // Perbarui quantity
+        $cart->save(); // Simpan perubahan
     
-        return response()->json(['success' => false, 'message' => 'Item not found']);
+        return redirect()->back()->with('success', 'Quantity updated successfully!');
     }
+     
     
 }

@@ -43,16 +43,12 @@
                                             Total Price
                                         </th>
                                         <th
-                                            class="py-3 px-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            Discount
-                                        </th>
-                                        <th
-                                            class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
-                                            Final Price
-                                        </th>
-                                        <th
                                             class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
                                             Address
+                                        </th>
+                                        <th
+                                            class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
+                                            Payment
                                         </th>
                                         <th
                                             class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
@@ -60,9 +56,7 @@
                                         </th>
                                         <th
                                             class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                            <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a
-                                                    href="{{ route('adminpage.order.create') }}"
-                                                    class="text-center m-5 text-white">Tambah</a></button>
+                                            Action
                                         </th>
                                     </tr>
                                 </thead>
@@ -91,19 +85,14 @@
                                                     class="text-sm font-semibold leading-tight text-slate-400">{{ number_format($order->total_price, 2, ',', '.') }}</span>
                                             </td>
                                             <td
-                                                class="p-2 text-center align-middle bg-transparent border-b whitespace-normal shadow-transparent">
-                                                <p class="mb-0 text-sm font-semibold leading-tight">{{ $order->discount }}
-                                                </p>
-                                            </td>
-                                            <td
-                                                class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                                class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
                                                 <span
-                                                    class="text-sm font-semibold leading-tight text-slate-400">{{ number_format($order->final_price, 2, ',', '.') }}</span>
+                                                    class="text-sm font-semibold leading-tight text-slate-400">{{ $order->shipping_address}}</span>
                                             </td>
                                             <td
                                                 class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
                                                 <span
-                                                    class="text-sm font-semibold leading-tight text-slate-400">{{ $order->shipping_address}}</span>
+                                                    class="text-sm font-semibold leading-tight text-slate-400">{{ $order->payment_method}}</span>
                                             </td>
                                             <td
                                                 class="p-2 text-center align-middle bg-transparent border-b whitespace-normal shadow-transparent">
@@ -191,4 +180,5 @@
                 </div>
             </div>
         </div>
+    </div>
     @endsection

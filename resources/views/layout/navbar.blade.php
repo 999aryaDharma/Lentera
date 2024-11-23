@@ -23,7 +23,7 @@
     <nav
         class="h-20 shadow-md shadow-indigo-500/40 fixed w-full top-0 bg-white flex justify-around place-items-center z-50">
         <div class="mx-4 ml-12">
-            <a href="" class="text-white"><img src="{{ asset('img/logo.png') }}" alt="logo"
+            <a href="{{ route('index') }}" class="text-white"><img src="{{ asset('img/logo.png') }}" alt="logo"
                     class="h-20"></a>
         </div>
 
@@ -37,7 +37,7 @@
                             d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
                     </svg>
                 </div>
-                <input type="search" id="search"
+                <input type="text" id="search"
                     class="mt-4 h-10 block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500/40 focus:border-indigo-500/40 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Search in Lentera" required />
             </div>
@@ -47,7 +47,7 @@
             @if (auth()->check() && auth()->user()->carts()->count() > 0)
                 <div
                     class="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform translate-x-2 -translate-y-2">
-                    {{ auth()->user()->carts()->count() }}
+                    {{ auth()->user()->carts()->sum('qty') }}
                 </div>
             @endif
 
@@ -116,18 +116,33 @@
                             <a href="{{ route('adminpage.dashboard') }}"
                                 class="block px-2 py-2 mt-1 text-sm font-bold text-gray-700 rounded-lg">Admin Page</a>
                         </div>
+                        <hr class="mx-3">
                     @endif
                     <div class="flex pl-2 py-0 hover:bg-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout my-2">
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout my-2 ml-1">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                             <path d="M9 12h12l-3 -3" />
                             <path d="M18 15l3 -3" />
                         </svg>
                         <a href="{{ route('logout') }}"
-                            class="block px-2 py-2 text-sm font-bold text-gray-700 rounded-lg">Logout</a>
+                            class="block px-1 py-2 text-sm font-bold text-gray-700 rounded-lg">Logout</a>
+                    </div>
+                    <hr class="mx-3">
+                    <div class="flex pl-2 py-0 hover:bg-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-notes my-2">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+                            <path d="M9 7l6 0" />
+                            <path d="M9 11l6 0" />
+                            <path d="M9 15l4 0" />
+                        </svg>
+                        <a href="{{ route('order.user') }}"
+                            class="block px-2 py-2 text-sm font-bold text-gray-700 rounded-lg">Your Orders</a>
                     </div>
                 </div>
             </div>
@@ -139,7 +154,7 @@
     <!-- foooter -->
     <footer class="border-t-2 border-indigo-500/40 bg-indigo-800 mt-24 text-white">
         <div class=" w-1/3 mx-10 py-10">
-            <img src="img/logo.png" alt="" class="h-28">
+            <img src="{{ asset('img/logo.png') }}" alt="" class="h-28">
             <p class="py-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe officiis rem dolorum illum
                 nesciunt. Necessitatibus?.</p>
             <div class="flex gap-5">

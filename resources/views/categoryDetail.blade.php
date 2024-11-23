@@ -1,7 +1,6 @@
 @extends('layout.navbar')
 
 @section('content')
-
 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8 shadow-md mt-28 drop-shadow-lg">
     <h2 class=" text-center text-2xl font-bold tracking-tight text-gray-900">{{ $category->category }} Categories</h2>
 
@@ -10,7 +9,7 @@
             <div class="group relative border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg max-w-60 max-h-72">
                 <div
                     class="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80 max-h-52">
-                    <img src="{{ asset('image/'. $product->image) }}" alt="Front of men&#039;s Basic Tee in black."
+                    <img src="{{ asset($product->image) }}" alt="Front of men&#039;s Basic Tee in black."
                         class="max-h-52 max-w-52 object-cover object-center lg:h-full lg:w-full">
                 </div>
                 <div class="mt-4 flex justify-between">

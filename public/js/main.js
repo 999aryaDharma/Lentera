@@ -122,7 +122,6 @@ $(function () {
 
 
 
-
 // Sweet Alert Update
 $(function () {
     $(document).on('click', '#update', function (e) {
@@ -154,88 +153,50 @@ $(function () {
 });
 
 
-// Fungsi Tambah Kurang Jumlah Produk
-(function() {
-    const cartItems = document.querySelectorAll('.cart-item');
-    const totalPriceElement = document.querySelector('.your-total-price');
-    const selectAllCheckbox = document.querySelector('input[type="checkbox"]:first-of-type');
+// Check Out Validate
+$(function() {
+    $(document).on('click', '#checkout', function(e) {
+        e.preventDefault();
 
-    // Fungsi untuk menghitung total harga berdasarkan item yang dicentang
-    function calculateTotal() {
-        let total = 0;
+        var form = $(this).closest('form'); // Ambil formulir terdekat
+        var paymentMethod = form.find('[name="payment_method"]')
+    .val(); // Ambil nilai payment_method
 
-        cartItems.forEach(function(item) {
-            const checkbox = item.querySelector('input[type="checkbox"]');
-            const subtotal = parseFloat(item.querySelector('.subtotal').dataset.subtotal);
-
-            if (checkbox.checked) {
-                total += subtotal;
-            }
-        });
-
-        // Update total pada elemen total price
-        totalPriceElement.textContent = `IDR ${total.toLocaleString('id-ID', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-        })}`;
-    }
-
-    // Checkbox pilih semua
-    if (selectAllCheckbox) {
-        selectAllCheckbox.addEventListener('change', function() {
-            const isChecked = selectAllCheckbox.checked;
-
-            cartItems.forEach(function(item) {
-                const checkbox = item.querySelector('input[type="checkbox"]');
-                checkbox.checked = isChecked;
+        // Validasi payment_method
+        if (!paymentMethod) {
+            Swal.fire({
+                title: "Error",
+                text: "Payment method cannot be empty!",
+                icon: "error",
+                confirmButtonColor: "#d33",
             });
+            return; // Hentikan proses jika payment_method kosong
+        }
 
-            calculateTotal();
-        });
-    }
-
-    cartItems.forEach(function(item) {
-        const decreaseButton = item.querySelector('.decrease');
-        const increaseButton = item.querySelector('.increase');
-        const quantityInput = item.querySelector('.quantity');
-        const priceElement = item.querySelector('.price');
-        const subtotalElement = item.querySelector('.subtotal');
-        const checkbox = item.querySelector('input[type="checkbox"]');
-
-        // Event listener untuk checkbox item
-        checkbox.addEventListener('change', calculateTotal);
-
-        // Tombol decrease
-        decreaseButton.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-                updateSubtotal();
-                calculateTotal();
+        // Tampilkan SweetAlert untuk konfirmasi
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to make this order?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Order it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tampilkan SweetAlert untuk notifikasi sukses
+                Swal.fire({
+                    title: "Success!",
+                    text: "Order was successfully placed!",
+                    icon: "success",
+                    confirmButtonColor: '#7066E0',
+                }).then(() => {
+                    form.submit();
+                });
             }
         });
-
-        // Tombol increase
-        increaseButton.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
-            updateSubtotal();
-            calculateTotal();
-        });
-
-        // Fungsi untuk memperbarui subtotal
-        function updateSubtotal() {
-            const quantity = parseInt(quantityInput.value);
-            const price = parseFloat(priceElement.dataset.price);
-            const newSubtotal = quantity * price;
-
-            // Update subtotal pada elemen
-            subtotalElement.dataset.subtotal = newSubtotal;
-            subtotalElement.textContent = `IDR ${newSubtotal.toLocaleString('id-ID', {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2,
-            })}`;
-        }
     });
-})();
+});
+
+
 

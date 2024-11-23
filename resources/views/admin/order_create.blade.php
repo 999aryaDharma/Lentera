@@ -1,4 +1,4 @@
-@extends('layout.sidebar')
+{{-- @extends('layout.sidebar')
 
 @section('title')
     <h3 class="ml-4 mb-3 text-2xl font-bold">Create Order</h3>
@@ -76,4 +76,4 @@
             </div>
         </div>
     </div>
-@endsection
+@endsection --}}

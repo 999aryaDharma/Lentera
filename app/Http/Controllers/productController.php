@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use App\Models\Cart;
 use App\Models\category;
 use App\Models\product;
 use Illuminate\Http\Request;
@@ -63,11 +64,6 @@ class productController extends Controller
             'image' => $request->image,
         ]);
 
-        // $image = time() . '.' . $request->image->extension();
-        // $request->image->move(public_path('images'), $image);
-
-
-
         if ($request->hasFile('image')) {
             $request->file('image')->move(public_path('image'), $request->file('image')->getClientOriginalName());
             $data->image = $request->file('image')->getClientOriginalName();
@@ -80,10 +76,24 @@ class productController extends Controller
     /**
      * Display the specified resource.
      */
-    public function showIndex() //(string $id)
+    public function show()
     {
-        $products = product::all();
-        return view('index', compact('products'));
+        $carts = Cart::all();
+        $category = Category::all();
+        $carousels = Carousel::all();
+        $products = product::orderBy('created_at', 'desc')
+            ->take(5)
+            ->get();
+        $allProducts = product::all();
+        return view('index', compact('products', 'category', 'carousels', 'carts', 'allProducts'));
+    }
+
+    public function detailProduct(string $id)
+    {
+        $carts = Cart::all();
+        $products = product::with('category')->find($id);
+        $allProducts = product::all();
+        return view('detail', compact('products', 'carts', 'allProducts'));
     }
 
     /**
