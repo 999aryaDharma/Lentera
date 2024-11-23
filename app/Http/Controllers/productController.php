@@ -52,6 +52,13 @@ class productController extends Controller
         }
 
 
+        $image = $request->file('image');
+        $destinationPath = public_path('image/carousel'); // Lokasi penyimpanan di folder public/image/carousel
+        $imageName = time() . '-' . $image->getClientOriginalName(); // Membuat nama file unik
+        $image->move($destinationPath, $imageName); // Memindahkan file ke folder tujuan
+
+        // Path relatif untuk disimpan di database
+        $imagePath = 'image/carousel/' . $imageName;
 
         $data = product::create([
             'name' => $request->name,
@@ -61,14 +68,11 @@ class productController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'stok' => $request->stok,
-            'image' => $request->image,
+            'image' => $imagePath,
         ]);
 
-        if ($request->hasFile('image')) {
-            $request->file('image')->move(public_path('image'), $request->file('image')->getClientOriginalName());
-            $data->image = $request->file('image')->getClientOriginalName();
-            $data->save();
-        }
+        $data->save();
+
 
         return redirect()->route('adminpage.product.index')->with('success', 'Product created successfully');
     }
@@ -143,18 +147,18 @@ class productController extends Controller
 
         // Periksa apakah ada gambar baru yang diupload
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($product->image && file_exists(public_path('image/' . $product->image))) {
-                unlink(public_path('image/' . $product->image));
+            // Hapus gambar lama
+            if (file_exists(public_path($product->image)) && is_file(public_path($product->image))) {
+                unlink(public_path($product->image));
             }
-
+    
             // Simpan gambar baru
-            $file = $request->file('image');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('image'), $fileName);
-            $product->image = $fileName;
+            $newImage = $request->file('image');
+            $newImageName = time() . '_' . $newImage->getClientOriginalName();
+            $newImage->move(public_path('image/'), $newImageName);
+    
+            $product->image = 'image/' . $newImageName;
         }
-
         // Simpan data produk
         $product->save();
 

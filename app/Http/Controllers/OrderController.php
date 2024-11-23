@@ -85,17 +85,27 @@ class OrderController extends Controller
         return redirect()->route('order.user')->with('success', 'Pesanan berhasil dibuat.');
     }
     
-    
 
     /**
      * Display the specified resource.
      */
-    public function showDetail(string $id)
+    public function show(string $id)
     {
-        $orders = Order::with('user')->find($id);
-
-        return view('admin.order_detail', compact('orders'));
+        // Ambil order berdasarkan order_id yang diberikan
+        $order = Order::with(['detail.product', 'user'])
+            ->where('id', $id)  // Filter berdasarkan order_id
+            ->first(); // Ambil satu order berdasarkan ID
+    
+        // Cek apakah order ditemukan
+        if (!$order) {
+            // Jika tidak ditemukan, redirect atau beri pesan error
+            return redirect()->route('admin.order.index')->with('error', 'Order not found');
+        }
+    
+        return view('admin.order_detail', compact('order'));
     }
+    
+    
 
     // Edit Method
     public function edit(Request $request, $id)

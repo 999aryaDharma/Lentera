@@ -5,7 +5,6 @@
 @endsection
 
 @section('admin')
-@vite('resources/css/app.css')
     <div class="container mx-auto p-3">
         <div class="flex items-center justify-between mb-6">
             <h1 class="font-bold text-3xl"></h1>
@@ -37,20 +36,8 @@
                         </div>
 
                         <div class="space-y-1">
-                            <label for="">Harga</label>
-                            <input type="text" name="total_price" placeholder="" value="{{ $orders->total_price }}" disabled
-                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
-                        </div>
-
-                        <div class="space-y-1">
-                            <label for="">Discount</label>
-                            <input type="text" name="discount" placeholder="" value="{{ $orders->discount }}" disabled
-                                class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
-                        </div>
-
-                        <div class="space-y-1">
                             <label for="">Total Harga</label>
-                            <input type="text" name="final_price" placeholder="" value="{{ $orders->final_price }}" disabled
+                            <input type="text" name="total_price" placeholder="" value="{{ $orders->total_price }}" disabled
                                 class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                         </div>
 

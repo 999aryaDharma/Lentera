@@ -114,7 +114,7 @@
                                                 {{-- Detail Button --}}
                                                 <button
                                                     class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
-                                                    <a href="" class="text-center m-1">
+                                                    <a href="{{ route('adminpage.order.show', [$order->id]) }}" class="text-center m-1">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                             height="24" viewBox="0 0 24 24" fill="none"
                                                             stroke="currentColor" stroke-width="2" stroke-linecap="round"
