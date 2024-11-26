@@ -151,48 +151,52 @@
     </div>
 </div>
 
-<!-- Tabel -->
-<div class="w-full px-6 py-6 mx-auto">
+<!-- Tabel Order -->
+<div class="w-full px-6 mx-auto">
     <!-- table 1 -->
 
     <div class="flex flex-wrap -mx-3">
         <div class="flex-none w-full max-w-full px-3">
             <div
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
-                <div class="p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
+                <div class="flex p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
                     <h6>Order List</h6>
+                    <div class="flex items-center md:ml-auto md:pr-4">
+                        <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
+                            <span
+                                class="text-sm ease-soft leading-5.6 absolute z-50 -ml-px flex h-full items-center whitespace-nowrap rounded-lg rounded-tr-none rounded-br-none border border-r-0 border-transparent bg-transparent py-2 px-2.5 text-center font-normal text-slate-500 transition-all">
+                                <svg  xmlns="http://www.w3.org/2000/svg"  width="20"  height="20"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-search"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /><path d="M21 21l-6 -6" /></svg>
+                            </span>
+                            <input type="text"
+                                class="pl-8.75 text-sm focus:shadow-soft-primary-outline ease-soft w-1/100 leading-5.6 relative -ml-px block min-w-0 flex-auto rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding py-1 pr-3 text-gray-700 transition-all placeholder:text-gray-500 focus:border-fuchsia-300 focus:outline-none focus:transition-shadow"
+                                placeholder="Type here..." />
+                        </div>
+                    </div>
                 </div>
                 <div class="flex-auto px-0 pt-0 pb-2">
                     <div class="p-0 overflow-x-auto">
                         <table class="items-center w-full mb-0 align-top border-gray-200 text-slate-500">
                             <thead class="align-bottom">
                                 <tr class="">
-                                    <th
-                                        class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    <th class="px-3 py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         ID
                                     </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    <th class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         User
                                     </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    <th class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         Total Price
                                     </th>
-                                    <th
-                                        class="py-3 px-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
+                                    <th class="py-3 px-2 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         Discount
                                     </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
+                                    <th class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
                                         Final Price
                                     </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
+                                    <th class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
                                         Address
                                     </th>
-                                    <th
-                                        class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
+                                    <th class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-normal text-slate-400 opacity-70">
                                         Status
                                     </th>
 
@@ -220,29 +224,24 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td
-                                        class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
+                                    <td class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
                                         <span
                                             class="text-sm font-semibold leading-tight text-slate-400">{{ number_format($order->total_price, 2, ',', '.') }}</span>
                                     </td>
-                                    <td
-                                        class="p-2 text-center align-middle bg-transparent border-b whitespace-normal shadow-transparent">
+                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-normal shadow-transparent">
                                         <p class="mb-0 text-sm font-semibold leading-tight">
                                             {{ $order->discount }}
                                         </p>
                                     </td>
-                                    <td
-                                        class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
+                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-nowrap shadow-transparent">
                                         <span
                                             class="text-sm font-semibold leading-tight text-slate-400">{{ number_format($order->final_price, 2, ',', '.') }}</span>
                                     </td>
-                                    <td
-                                        class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
+                                    <td class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
                                         <span
                                             class="text-sm font-semibold leading-tight text-slate-400">{{ $order->shipping_address}}</span>
                                     </td>
-                                    <td
-                                        class="p-2 text-center align-middle bg-transparent border-b whitespace-normal shadow-transparent">
+                                    <td class="p-2 text-center align-middle bg-transparent border-b whitespace-normal shadow-transparent">
                                         @if ($order->payment_status == 'paid')
                                         <span
                                             class="text-sm font-semibold leading-tight border px-3 pb-0.5 rounded-md bg-green-400 text-slate-600">{{ $order->payment_status }}

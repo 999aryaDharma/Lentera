@@ -20,9 +20,8 @@
             <div class="shadow-lg rounded-xl overflow-hidden">
                 <div class="p-6">
                     <h2 class="text-xl font-medium text-center text-gray-900 mb-6">Create a New Order</h2>
-                    <form action="{{ route('adminpage.order.store') }}" method="POST" data-redirect-route="/admin/orderlist" class="space-y-4">
+                    <form action="{{ route('adminpage.order.store') }}" method="POST" data-redirect-route="/admin/order" class="space-y-4">
                         @csrf
-
                         <div class="space-y-1">
                             <label for="user_id">Select User</label>
                             <select name="user_id" class="w-full p-2 border border-gray-300 rounded-lg">

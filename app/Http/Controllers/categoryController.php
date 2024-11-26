@@ -12,12 +12,9 @@ class categoryController extends Controller
      */
     public function index()
     {
-        //
-        // $categories = category::all();
-        $categories = category::all();
+        $categories = Category::withCount('products')->get(); // Menghitung jumlah produk per kategori
         return view('admin.category', compact('categories'));
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -48,9 +45,10 @@ class categoryController extends Controller
      */
     public function show(category $category)
     {
-        //
-        
+        $data = $category;
+        return view('index', compact('data'));
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -68,7 +66,7 @@ class categoryController extends Controller
     public function update(Request $request, category $category)
     {
         //
-        category::where('id', $category->id)->update ([
+        category::where('id', $category->id)->update([
             'category' => $request->category,
             'jumlah' => $request->jumlah,
         ]);
@@ -82,7 +80,7 @@ class categoryController extends Controller
     public function destroy(category $category)
     {
         //
-        category::where('id', $category->id)->delete(); 
+        category::where('id', $category->id)->delete();
 
         return redirect()->route('adminpage.category.index');
     }

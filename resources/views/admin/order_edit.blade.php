@@ -20,7 +20,7 @@
             <div class=" shadow-lg rounded-xl overflow-hidden">
                 <div class="p-6">
                     <h2 class="text-xl font-medium text-center text-gray-900 mb-6">Edit an Order Here!</h2>
-                    <form action="{{ route('adminpage.order.update', ['id' => $orders->id]) }}" method="POST" id=""
+                    <form action="{{ route('adminpage.order.update', [$orders->id]) }}" method="POST" id=""
                         class="space-y-4 ">
                         @csrf
                         @method('PUT')

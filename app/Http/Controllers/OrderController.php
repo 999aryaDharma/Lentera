@@ -21,7 +21,7 @@ class OrderController extends Controller
     
     public function index()
     {
-        $orders = Order::get();
+        $orders = Order::all();
 
         return view('admin.orderList', compact('orders'));
     }
@@ -45,35 +45,38 @@ class OrderController extends Controller
             'shipping_address' => 'required|string',
             'payment_status' => 'required|in:pending,failed,paid',
         ]);
-
+    
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
-        // Konversi persen menjadi nilai diskon yang benar
-        $discountAmount = round($request->total_price * ($request->discount / 100));
-        $finalPrice = round($request->total_price - $discountAmount);
-
+    
+        // Hitung jumlah diskon dan harga akhir tanpa pembulatan berlebih
+        $discountAmount = $request->total_price * ($request->discount / 100);
+        $finalPrice = $request->total_price - $discountAmount;
+    
         Order::create([
             'user_id' => $request->user_id,
             'total_price' => $request->total_price,
             'discount' => $request->discount, // Menyimpan nilai persen
-            'final_price' => round($finalPrice), // Membulatkan ke dua desimal
+            'final_price' => $finalPrice, // Tanpa pembulatan berlebih
             'shipping_address' => $request->shipping_address,
             'payment_status' => $request->payment_status,
         ]);
-
+    
         return redirect()->route('adminpage.order.index')->with('success', 'Order created successfully');
     }
+    
 
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function showDetail(string $id)
     {
-        //
+        $orders = Order::with('user')->find($id);
+
+        return view('admin.order_detail', compact('orders'));
     }
 
     // Edit Method

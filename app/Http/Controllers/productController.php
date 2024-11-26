@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carousel;
 use App\Models\category;
 use App\Models\product;
 use Faker\Guesser\Name;
@@ -32,7 +33,6 @@ class productController extends Controller
 
     public function index()
     {
-        //
         $products = product::all();
         return view('admin.product', compact('products'));
     }
@@ -44,7 +44,7 @@ class productController extends Controller
     {
         //
         $categories = category::all();
-        return view('admin.createProduct', compact('categories'));
+        return view('admin.product_create', compact('categories'));
     }
 
     /**
@@ -52,22 +52,21 @@ class productController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $validator = Validator::make($request->all(), [
-            'product' => 'required|string',
+            'name' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'size' => 'required|string',
             'warna' => 'required|string',
             'deskripsi' => 'required|string',
             'harga' => 'required|string',
             'stok' => 'required|string',
-            'image' => 'required|image',   
+            'image' => 'required|image',
         ]);
 
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('images'), $imageName);
@@ -82,9 +81,9 @@ class productController extends Controller
             'stok' => $request->stok,
             'image' => $imageName,
         ]);
+        // $image = time() . '.' . $request->image->extension();
+        // $request->image->move(public_path('images'), $image);
 
-        
-        
 
 
         // if ($request->hasFile('image')) {
@@ -99,6 +98,7 @@ class productController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show(product $product)
     {
         // dd($product);
@@ -107,6 +107,7 @@ class productController extends Controller
         $data = $product;
         // $data = product::with('category')->find('id');
         return view('detail', compact('data'));
+ 
     }
     
 
@@ -115,6 +116,7 @@ class productController extends Controller
      */
     public function edit(product $product)
     {
+
         //
         // $product = product::with('category')->find('id');
         // dd($product);
@@ -122,6 +124,7 @@ class productController extends Controller
         $data = $product;
 
         return view('admin.editProduct', compact('data', 'categories'));
+
     }
 
     /**
@@ -160,6 +163,7 @@ class productController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required',
             'stok' => 'required',
+
             'image' => 'nullable|image', // Gambar tidak wajib
         ]);
 
@@ -221,4 +225,5 @@ class productController extends Controller
 
         return redirect()->route('adminpage.product.index');
     }
+
 }

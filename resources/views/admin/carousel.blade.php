@@ -1,7 +1,7 @@
 @extends('layout.sidebar')
 
 @section('title')
-<h3 class="ml-4">Manage Category</h3>
+<h3 class="ml-4">Manage Event Carousels</h3>
 @endsection
 
 @section('admin')
@@ -13,7 +13,7 @@
             <div
                 class="relative flex flex-col min-w-0 mb-6 break-words bg-white border-0 border-transparent border-solid shadow-soft-xl rounded-2xl bg-clip-border">
                 <div class="flex p-6 pb-0 mb-0 bg-white border-b-0 border-b-solid rounded-t-2xl border-b-transparent">
-                    <h6>Category table</h6>
+                    <h6>Carousels table</h6>
                     <div class="flex items-center md:ml-auto md:pr-4">
                         <div class="relative flex flex-wrap items-stretch w-full transition-all rounded-lg ease-soft">
                             <span
@@ -37,46 +37,46 @@
                                     </th>
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                        Nama
+                                        Title
                                     </th>
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
-                                        Jumlah
+                                        Image
                                     </th>
                                     <th
                                         class="py-3 font-bold text-center uppercase align-middle bg-transparent border-b border-gray-200 shadow-none text-xxs border-b-solid tracking-none whitespace-nowrap text-slate-400 opacity-70">
                                         <button class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700"><a
-                                                href="{{ route('adminpage.category.create') }}"
+                                                href="{{ route('adminpage.carousel.create') }}"
                                                 class="text-center m-5 text-white">Tambah</a></button>
                                     </th>
                                 </tr>
                             </thead>
                             <tbody class="">
-                                @foreach ($categories as $category)
+                                @foreach ($carousels as $item)
                                 <tr>
                                     <td
-                                        class=" text-center align-middle border-b whitespace-nowrap shadow-transparent">
+                                        class="px-3 text-center align-middle border-b whitespace-nowrap shadow-transparent">
                                         <span
-                                            class="text-xs font-semibold leading-tight text-slate-400">{{ $category->id }}</span>
+                                            class="text-xs font-semibold leading-tight text-slate-400">{{ $loop->iteration }}</span>
                                     </td>
 
                                     <td
-                                        class="text-center align-middle border-b whitespace-nowrap shadow-transparent">
+                                        class="p-2 text-center align-middle border-b whitespace-nowrap shadow-transparent">
                                         <span
-                                            class="text-sm font-semibold leading-normal text-gray-900">{{ $category->category }}</span>
+                                            class="text-sm font-semibold leading-normal text-gray-900">{{ $item->title }}</span>
                                     </td>
 
                                     <td
-                                        class=" text-center align-middle border-b whitespace-nowrap shadow-transparent">
-                                        <span
-                                            class="text-sm font-semibold leading-normal text-gray-900">{{ $category->products_count }}</span>
+                                        class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
+                                        <span class="text-sm font-semibold leading-tight text-slate-400 grid place-content-center">
+                                            <img src="{{ asset($item->image) }}" alt="" class="h-24"></span>
                                     </td>
 
-                                    <td class="py-4 text-center border-b flex justify-center space-x-1">
+                                    <td class="py-8 text-center border-b flex justify-center space-x-1">
                                         {{-- Edit Button --}}
                                         <button
                                             class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">
-                                            <a href="{{ route('adminpage.category.edit', [$category->id]) }}" class="text-center m-1">
+                                            <a href="{{ route('adminpage.carousel.edit', ['id'=>$item->id]) }}" class="text-center m-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -92,7 +92,7 @@
                                             </a>
                                         </button>
 
-                                        <form action="{{ route('adminpage.category.destroy', [$category->id]) }}" method="POST">
+                                        <form action="{{ route('adminpage.carousel.destroy', ['id'=>$item->id]) }}" method="POST">
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" id="delete"

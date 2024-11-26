@@ -25,8 +25,8 @@
 
 
                     <div class="space-y-1">
-                        <label for="product">Nama Produk</label>
-                        <input type="text" name="product" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                        <label for="name">Nama Produk</label>
+                        <input type="text" name="name" class="w-full p-2 border border-gray-300 rounded-lg" required>
 
                         @error('product')
 
@@ -86,8 +86,8 @@
 
                     <div class="space-y-1">
                         <label for="deskripsi">Deskripsi</label>
-                        <input type="text" name="deskripsi" class="w-full p-2 border border-gray-300 rounded-lg" required>
-
+                        <textarea type="text" name="deskripsi" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                        </textarea>
                         @error('deskripsi')
 
                         <small class="text-red-500">{{$message}}</small>
@@ -122,7 +122,7 @@
 
                     <div class="space-y-1">
                         <label for="image">Image</label>
-                        <input type="file" name="image" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                        <input type="file" name="image" class="w-full p-2 rounded-lg" required>
 
                         @error('image')
 
