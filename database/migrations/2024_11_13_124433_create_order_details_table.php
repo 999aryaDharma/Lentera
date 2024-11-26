@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('detail_order', function (Blueprint $table) {
             $table->id('id_detail');                  
-            $table->foreignId('id_order')         
-                ->constrained('orders')
-                ->onDelete('cascade');
-            $table->foreignId('id_produk')            
-                ->constrained('products')
-                ->onDelete('cascade');
+            $table->foreignId('id_order');
+            $table->constrained('orders');
+            $table->onDelete('cascade');
+            $table->foreignId('id_produk');
+            $table->constrained('products');
+            $table->onDelete('cascade');
             $table->integer('kuantitas');             
             $table->decimal('harga', 10, 2);          
             $table->timestamps();                     
