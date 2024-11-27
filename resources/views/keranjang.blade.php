@@ -13,9 +13,9 @@
                     <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-6 shadow-md mt-3">
                         <div class="flex justify-between cart-item" data-item-id="{{ $cart->id }}">
                             <div class="flex gap-5 place-items-center">
-                                <a href="{{ route('detailProduct', ['id' => $cart->product->id]) }}">
+                                <a href="{{ route('detailProduct', [$cart->product->id]) }}">
                                     <div>
-                                        <img src="{{ asset($cart->product->image) }}" alt=""
+                                        <img src="/images/{{$cart->product->image}}" alt=""
                                             class="w-20 drop-shadow-lg">
                                     </div>
                                 </a>

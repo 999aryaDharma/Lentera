@@ -31,12 +31,6 @@
                             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                     </div>
 
-                    <div class="space-y-1">
-                        <label for="">Jumlah</label>
-                        <input type="number" name="jumlah" 
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
-                    </div>
-
 
                     <hr class="border-gray-300 my-4">
                     <button type="submit" id="create"

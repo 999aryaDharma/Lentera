@@ -19,7 +19,7 @@
                     <div class="flex font-sans m-8">
                         <div
                             class="flex-none h-80 w-80 relative group  border-2 p-3 shadow-md shadow-indigo-500/40 rounded-lg ">
-                            <img src="{{ asset($detail->product->image) }}" alt=""
+                            <img src="/images/{{$detail->product->image}}" alt=""
                                 class="absolute  inset-0 w-full h-full object-cover" loading="lazy" />
                         </div>
 

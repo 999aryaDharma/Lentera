@@ -25,8 +25,8 @@
 
 
                     <div class="space-y-1">
-                        <label for="name">Nama Produk</label>
-                        <input type="text" name="name" class="w-full p-2 border border-gray-300 rounded-lg" required>
+                        <label for="product">Nama Produk</label>
+                        <input type="text" name="product" class="w-full p-2 border border-gray-300 rounded-lg" required>
 
                         @error('product')
 

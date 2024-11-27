@@ -14,7 +14,7 @@
                         <div class="flex justify-between">
                             <div class="flex gap-5 place-items-center">
                                 <div>
-                                    <img src="{{ $cart->product->image }}" alt="{{ $cart->product->name }}" class="w-28">
+                                    <img src="/images/{{$cart->product->image }}" alt="{{ $cart->product->name }}" class="w-28">
                                 </div>
                                 <div>
                                     <h3 class="text-lg text-gray-700">{{ $cart->product->name }}</h3>

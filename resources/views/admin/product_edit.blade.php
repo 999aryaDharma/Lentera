@@ -25,8 +25,8 @@
                         @csrf
                         @method('PUT')
                         <div class="space-y-1">
-                            <label for="name">Nama Produk</label>
-                            <input type="text" name="name" value="{{ $products->name }}"
+                            <label for="product">Nama Produk</label>
+                            <input type="text" name="product" value="{{ $products->product }}"
                                 class="w-full p-2 border border-gray-300 rounded-lg" required>
 
                             @error('product')
@@ -119,7 +119,7 @@
                             <!-- Menampilkan gambar produk -->
                             @if($products->image)
                                 <div class="mt-2">
-                                    <img src="{{ asset($products->image) }}" alt="Product Image" class="w-32 h-32 object-cover">
+                                    <img src="/images/{{$products->image}}" alt="Product Image" class="w-32 h-32 object-cover">
                                 </div>
                             @endif
                         

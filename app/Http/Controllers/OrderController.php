@@ -61,6 +61,13 @@ class OrderController extends Controller
         $total = $cartUser->reduce(function ($carry, $cart) {
             return $carry + ($cart->qty * $cart->product->harga);
         }, 0);
+
+        // $qty = $request->qty;
+        // $products = $request->product_id;
+        // $product = product::findOrFail($products);
+
+        // $product->stok -= $qty;
+        // $product->save();
     
         // Buat pesanan
         $orders = Order::create([
@@ -79,8 +86,12 @@ class OrderController extends Controller
                 'subtotal' => $cart->qty * $cart->product->harga,
             ]);
         }
-    
+
+        
+
         Cart::where('user_id', Auth::id())->delete();
+
+        
     
         return redirect()->route('order.user')->with('success', 'Pesanan berhasil dibuat.');
     }
@@ -147,7 +158,7 @@ class OrderController extends Controller
         return redirect()->route('adminpage.order.index');
     }
     
-    public function destroyOrderUser(Request $request, $id)
+    public function destroyOrderUser($id)
     {
         $order = Order::findOrFail($id);
 
@@ -158,5 +169,10 @@ class OrderController extends Controller
         $order->delete();
 
         return redirect()->route('order.user');
+
+
+        // $product::where('id', $product->id)->delete();
+
+        // return redirect()->route('adminpage.product.index');
     }
 }

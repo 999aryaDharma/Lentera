@@ -148,7 +148,7 @@
                                                     </a>
                                                 </button>
 
-                                                <form action="{{ route('adminpage.order.destroy', [$order->id]) }}"
+                                                <!-- <form action="{{ route('adminpage.order.destroy', [$order->id]) }}"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')
@@ -169,7 +169,7 @@
                                                             </svg>
                                                         </span>
                                                     </button>
-                                                </form>
+                                                </form> -->
                                             </td>
                                         </tr>
                                     </tbody>

@@ -30,12 +30,12 @@ class CarouselController extends Controller
  
          // Proses penyimpanan file gambar
          $image = $request->file('image');
-         $destinationPath = public_path('image/carousel'); // Lokasi penyimpanan di folder public/image/carousel
+         $destinationPath = public_path('images/carousel'); // Lokasi penyimpanan di folder public/image/carousel
          $imageName = time() . '-' . $image->getClientOriginalName(); // Membuat nama file unik
          $image->move($destinationPath, $imageName); // Memindahkan file ke folder tujuan
  
          // Path relatif untuk disimpan di database
-         $imagePath = 'image/carousel/' . $imageName;
+         $imagePath = 'images/carousel/' . $imageName;
  
          // Simpan data ke database
          $carousel = new Carousel();
@@ -80,9 +80,9 @@ class CarouselController extends Controller
              // Simpan gambar baru
              $newImage = $request->file('image');
              $newImageName = time() . '_' . $newImage->getClientOriginalName();
-             $newImage->move(public_path('image/carousel'), $newImageName);
+             $newImage->move(public_path('images/carousel'), $newImageName);
      
-             $carousels->image = 'image/carousel/' . $newImageName;
+             $carousels->image = 'images/carousel/' . $newImageName;
          }
  
          // Simpan data produk

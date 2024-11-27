@@ -92,7 +92,7 @@
                                                     class="p-2 text-left align-middle bg-transparent border-b whitespace-normal shadow-transparent">
                                                     <span
                                                         class="text-sm font-semibold leading-tight text-slate-500 grid place-content-center"><img
-                                                            src="{{ asset($detail->product->image) }}" alt=""
+                                                            src="/images/{{$detail->product->image}}" alt=""
                                                             class="h-20"></span>
                                                 </td>
                                                     <td
