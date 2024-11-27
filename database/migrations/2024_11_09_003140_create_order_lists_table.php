@@ -14,14 +14,15 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
-            $table->decimal('total_price', 15, 2);
-            $table->decimal('discount', 15, 2)->default(0);
-            $table->decimal('final_price', 15, 2);
-            $table->text('shipping_address'); 
+            $table->bigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->decimal('total_price', 10, 2); // Total harga pesanan
+            $table->string('shipping_address');    // Alamat pengiriman
+            $table->string('payment_method');    // Alamat pengiriman
             $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
             $table->timestamps();
         });
+        
     }
 
     /**

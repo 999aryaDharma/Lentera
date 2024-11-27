@@ -9,14 +9,13 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'user_id',
-        'total_price',
-        'discount',
-        'final_price',
-        'shipping_address',
-        'payment_status',
-    ];
+    protected $fillable = ['user_id', 'total_price', 'shipping_address', 'payment_method', 'status'];
+
+    // Relasi dengan Order Detail
+    public function detail()
+    {
+        return $this->hasMany(orderDetail::class, 'order_id');
+    }
 
     // Relasi dengan User
     public function user()
@@ -24,9 +23,9 @@ class Order extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    // Akses final_price otomatis berdasarkan diskon
-    public function getFinalPriceAttribute()
+    // Order.php
+    public function products()
     {
-        return $this->total_price - $this->discount;
+        return $this->belongsToMany(Product::class);
     }
 }

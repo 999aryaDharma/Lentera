@@ -19,7 +19,7 @@
             <div class="shadow-lg rounded-xl overflow-hidden">
                 <div class="p-6">
                     <h2 class="text-xl font-medium text-center text-gray-900 mb-6">Edit a Carousel</h2>
-                    <form action="{{ route('adminpage.carousel.update', ['id'=>$carousels->id]) }}" method="POST" class="space-y-4"
+                    <form action="{{ route('adminpage.carousel.update', [$carousels->id]) }}" method="POST" class="space-y-4"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')

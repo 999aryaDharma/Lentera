@@ -7,6 +7,7 @@ use App\Models\product;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -128,9 +129,26 @@ class UserController extends Controller
         return redirect()->route('adminpage.user.index');
     }
 
-    // Show Method
-    public function show(string $id)
+    // Update Info User Method
+    public function updateUserInfo(Request $request)
     {
-        //
+        $user = Auth::user();
+    
+        // Validasi input
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'telepon' => 'required|string|max:15',
+            'alamat' => 'required|string|max:255',
+        ]);
+        
+        // Update data menggunakan query builder
+        User::where('id', $user->id)->update([
+            'name' => $validated['name'],
+            'telepon' => $validated['telepon'],
+            'alamat' => $validated['alamat'],
+        ]);
+    
+        return redirect()->back()->with('success', 'Information updated successfully!');
     }
+    
 }

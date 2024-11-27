@@ -6,5 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class orderDetail extends Model
 {
-    //
+    protected $fillable = ['order_id', 'product_id', 'qty', 'subtotal'];
+
+    public function product()
+    {
+        return $this->belongsTo(product::class, 'product_id');
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

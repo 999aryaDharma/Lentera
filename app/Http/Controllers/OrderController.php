@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Order;
+use App\Models\orderDetail;
+use App\Models\product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
@@ -19,6 +23,18 @@ class OrderController extends Controller
         return view('admin.dashboard', compact('data'));
     }
     
+    public function indexUser()
+    {
+        $orders = Order::with(['detail.product', 'user'])
+            ->where('user_id', Auth::user()->id)
+            ->get();
+        $total = $orders->sum('total_price');
+    
+        return view('viewOrder', compact('orders', 'total'));
+    }
+    
+    
+
     public function index()
     {
         $orders = Order::all();
@@ -38,46 +54,58 @@ class OrderController extends Controller
     // Store Method
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'user_id' => 'required|exists:users,id',
-            'total_price' => 'required|numeric',
-            'discount' => 'nullable|numeric|min:0|max:100', // Discount dalam persen
-            'shipping_address' => 'required|string',
-            'payment_status' => 'required|in:pending,failed,paid',
+        $carts = Cart::where('user_id', Auth::user()->id);
+        $cartUser = $carts->get();
+    
+        // Hitung total harga
+        $total = $cartUser->reduce(function ($carry, $cart) {
+            return $carry + ($cart->qty * $cart->product->harga);
+        }, 0);
+    
+        // Buat pesanan
+        $orders = Order::create([
+            'user_id' => Auth::user()->id,
+            'total_price' => $total,
+            'shipping_address' => Auth::user()->alamat,
+            'payment_method' => $request->payment_method,
+            'payment_status' => 'pending',
         ]);
     
-        if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+        // Buat detail pesanan
+        foreach ($cartUser as $cart) {
+            $orders->detail()->create([
+                'product_id' => $cart->product_id,
+                'qty' => $cart->qty, // Pastikan qty dari cart dicatat
+                'subtotal' => $cart->qty * $cart->product->harga,
+            ]);
         }
     
-        // Hitung jumlah diskon dan harga akhir tanpa pembulatan berlebih
-        $discountAmount = $request->total_price * ($request->discount / 100);
-        $finalPrice = $request->total_price - $discountAmount;
+        Cart::where('user_id', Auth::id())->delete();
     
-        Order::create([
-            'user_id' => $request->user_id,
-            'total_price' => $request->total_price,
-            'discount' => $request->discount, // Menyimpan nilai persen
-            'final_price' => $finalPrice, // Tanpa pembulatan berlebih
-            'shipping_address' => $request->shipping_address,
-            'payment_status' => $request->payment_status,
-        ]);
-    
-        return redirect()->route('adminpage.order.index')->with('success', 'Order created successfully');
+        return redirect()->route('order.user')->with('success', 'Pesanan berhasil dibuat.');
     }
     
-
-
 
     /**
      * Display the specified resource.
      */
-    public function showDetail(string $id)
+    public function show(string $id)
     {
-        $orders = Order::with('user')->find($id);
-
-        return view('admin.order_detail', compact('orders'));
+        // Ambil order berdasarkan order_id yang diberikan
+        $order = Order::with(['detail.product', 'user'])
+            ->where('id', $id)  // Filter berdasarkan order_id
+            ->first(); // Ambil satu order berdasarkan ID
+    
+        // Cek apakah order ditemukan
+        if (!$order) {
+            // Jika tidak ditemukan, redirect atau beri pesan error
+            return redirect()->route('admin.order.index')->with('error', 'Order not found');
+        }
+    
+        return view('admin.order_detail', compact('order'));
     }
+    
+    
 
     // Edit Method
     public function edit(Request $request, $id)
@@ -108,12 +136,27 @@ class OrderController extends Controller
      */
     public function destroy(Request $request, $id)
     {
-        $orders = Order::with('user')->find($id);
+        $order = Order::findOrFail($id);
 
-        if ($orders) {
-            $orders->delete();
-        }
+        // Hapus detail pesanan terlebih dahulu
+        $order->detail()->delete();
+    
+        // Hapus pesanan
+        $order->delete();
 
         return redirect()->route('adminpage.order.index');
+    }
+    
+    public function destroyOrderUser(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+
+        // Hapus detail pesanan terlebih dahulu
+        $order->detail()->delete();
+    
+        // Hapus pesanan
+        $order->delete();
+
+        return redirect()->route('order.user');
     }
 }

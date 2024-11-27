@@ -2,11 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\category;
 use Illuminate\Http\Request;
 
 class categoryController extends Controller
 {
+    public function showCategory($id)
+    {
+        $carts = Cart::all();
+        $category = Category::with('products')->find($id);
+
+        if (!$category) {
+            return redirect()->back()->with('error', 'Category not found');
+        }
+
+        return view('categoryDetail', compact('category', 'carts'));
+    }
     /**
      * Display a listing of the resource.
      */

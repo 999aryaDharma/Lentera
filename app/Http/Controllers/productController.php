@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carousel;
+use App\Models\Cart;
 use App\Models\category;
 use App\Models\product;
 use Faker\Guesser\Name;
@@ -16,14 +17,17 @@ class productController extends Controller
      * Display a listing of the resource.
      */
     public function web(){
+        $carousels = Carousel::get();
+
         $dataproduct = product::latest()->take(5)->get();
         
 
-        $best = product::get()->take(5);
+        $best = product::whereHas('orderDetails')->withSum('orderDetails as total_sale', 'qty')->orderByDesc('total_sale')->take(5)->get();
+        // $best = product::withSum('orderDetail as total_sale', 'qty')->orderByDesc('total_sale')->take(5)->get();
 
         $all = product::all();
 
-        return view('index', compact('dataproduct', 'best', 'all'));
+        return view('index', compact('dataproduct', 'best', 'all', 'carousels'));
     }
 
     // public function recomend(){
@@ -54,7 +58,7 @@ class productController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
+            'product' => 'required|string',
             'category_id' => 'required|exists:categories,id',
             'size' => 'required|string',
             'warna' => 'required|string',
@@ -105,8 +109,11 @@ class productController extends Controller
         // //
         // $categories = category::all();
         $data = $product;
+
+        $allData = product::all();
+
         // $data = product::with('category')->find('id');
-        return view('detail', compact('data'));
+        return view('detail', compact('data', 'allData'));
  
     }
     
@@ -114,47 +121,67 @@ class productController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(product $product)
+    public function edit(string $id)
     {
 
         //
         // $product = product::with('category')->find('id');
         // dd($product);
-        $categories = category::all();
-        $data = $product;
+        // $categories = category::all();
+        // $products = $product;
 
-        return view('admin.editProduct', compact('data', 'categories'));
+        // return view('admin.product_edit', compact('products', 'categories'));
+        $products = product::with('category')->find($id);
+
+        return view('admin.product_edit', compact('products'), [
+            'sizes' => ['S', 'M', 'L', 'XL'],
+            'products' => $products
+        ]);;
 
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request,product $product)
+    public function update(Request $request, string $id)
     {
-    // $validator = Validator::make($request->all(), [
-    //     'product' => 'required',
-    //     'category_id' => 'required',
-    //     'image' => 'required',
-    // ]);
+        // return redirect()->route('adminpage.product.index');
+        // $validator = Validator::make($request->all(), [
+        //     'product' => 'required',
+        //     'category_id' => 'required',
+        //     'size' => 'required',
+        //     'warna' => 'required',
+        //     'deskripsi' => 'required',
+        //     'harga' => 'required',
+        //     'stok' => 'required',
 
-    // if ($validator->fails()) return redirect()->back()->withInput()->withErrors($validator);
+        //     'image' => 'nullable|image', 
+        // ]);
 
+        // if ($validator->fails()) {
+        //     return redirect()->back()->withInput()->withErrors($validator);
+        // }
 
-    // $imageName = time() . '.' . $request->image->extension();
-    // $request->image->move(public_path('images'), $imageName);
+        // // Ambil data produk lama
+        // $product = product::all();
 
+        // // Periksa apakah ada gambar baru yang diupload
+        // if ($request->hasFile('image')) {
+        //     // Hapus gambar lama jika ada
+        //     if ($product->image && file_exists(public_path('images/' . $product->image))) {
+        //         unlink(public_path('images/' . $product->image));
+        //     }
 
-    // $$product = product::all();
+        //     // Simpan gambar baru
+        //     $imageName = time() . '.' . $request->image->extension();
+        //     $request->image->move(public_path('images'), $imageName);
+        //     // $product->image = $fileName;
+        // }
+        // // Simpan data produk
+        // // $product->save();
+        // // // product::where('id', $product)->update($product);
 
-    // $product->product = $request->product;
-    // $product->category_id = $request->category_id;
-    // $product->image = $request->image;
-
-    // product::where('id', $product)->update($product);
-
-
-    // return redirect()->route('adminpage.product.index');
+        // return redirect()->route('adminpage.product.index')->with('success', 'Product updated successfully.');
         $validator = Validator::make($request->all(), [
             'product' => 'required',
             'category_id' => 'required',
@@ -163,8 +190,7 @@ class productController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required',
             'stok' => 'required',
-
-            'image' => 'nullable|image', // Gambar tidak wajib
+            'image' => 'nullable|image|mimes:jpeg,png,jpg', // Gambar tidak wajib
         ]);
 
         if ($validator->fails()) {
@@ -172,33 +198,33 @@ class productController extends Controller
         }
 
         // Ambil data produk lama
-        $product = product::all();
+        $product = product::findOrFail($id);
 
         // Update data produk
-        // $product->name = $request->name;
-        // $product->category_id = $request->category_id;
-        // $product->size = $request->size;
-        // $product->warna = $request->warna;
-        // $product->deskripsi = $request->deskripsi;
-        // $product->harga = $request->harga;
-        // $product->stok = $request->stok;
+        $product->product = $request->product;
+        $product->category_id = $request->category_id;
+        $product->size = $request->size;
+        $product->warna = $request->warna;
+        $product->deskripsi = $request->deskripsi;
+        $product->harga = $request->harga;
+        $product->stok = $request->stok;
 
         // Periksa apakah ada gambar baru yang diupload
         if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($product->image && file_exists(public_path('images/' . $product->image))) {
-                unlink(public_path('images/' . $product->image));
+            // Hapus gambar lama
+            if (file_exists(public_path($product->image)) && is_file(public_path($product->image))) {
+                unlink(public_path($product->image));
             }
 
             // Simpan gambar baru
-            $imageName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('images'), $imageName);
-            // $product->image = $fileName;
-        }
+            $newImage = $request->file('image');
+            $newImageName = time() . '_' . $newImage->getClientOriginalName();
+            $newImage->move(public_path('images/'), $newImageName);
 
+            $product->image = 'images/' . $newImageName;
+        }
         // Simpan data produk
-        // $products->save();
-        product::where('id', $product)->update($product);
+        $product->save();
 
         return redirect()->route('adminpage.product.index')->with('success', 'Product updated successfully.');
     }
