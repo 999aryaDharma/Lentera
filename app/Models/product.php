@@ -15,10 +15,14 @@ class product extends Model
     {
         return $this->belongsTo(category::class, 'category_id');
     }
-
-    // Product.php
+    
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class, 'product_id');
+    }
+
+    public function checkoutSingles()
+    {
+        return $this->hasMany(CheckoutSingle::class);
     }
 }

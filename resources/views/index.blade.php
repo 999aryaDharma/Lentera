@@ -91,13 +91,15 @@
                             </h3>
                             <p class="mt-1 text-sm text-gray-500">{{ $product->warna }}</p>
                         </div>
-                        <p class="text-sm font-medium text-gray-900">{{ number_format($product->harga) }}</p>
+                        <div>
+                            <p class="mt-1 text-sm text-gray-500 text-end">{{ $product->size }}</p>
+                            <p class="text-sm font-medium text-gray-900">{{ number_format($product->harga) }}</p>
+                        </div>
                     </div>
                 </div>
             @endforeach
         </div>
     </div>
-
 
     <!-- Best Seller -->
     {{-- <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8 shadow-md mt-24 drop-shadow-lg">
@@ -148,7 +150,10 @@
                             </h3>
                             <p class="mt-1 text-sm text-gray-500">{{ $all->warna }}</p>
                         </div>
-                        <p class="text-sm font-medium text-gray-900">{{ number_format($all->harga) }}</p>
+                        <div>
+                            <p class="mt-1 text-sm text-gray-500 text-end">{{ $all->size }}</p>
+                            <p class="text-sm font-medium text-gray-900">{{ number_format($all->harga) }}</p>
+                        </div>
                     </div>
                 </div>
             @endforeach
@@ -158,16 +163,7 @@
     <script src="../path/to/flowbite/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if ($message = Session::get('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: '{{ $message }}',
-                confirmButtonColor: '#7066E0',
-            });
-        </script>
-    @endif
+
 
     </body>
 @endsection

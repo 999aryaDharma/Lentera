@@ -54,37 +54,86 @@ class OrderController extends Controller
     // Store Method
     public function store(Request $request)
     {
-        $carts = Cart::where('user_id', Auth::user()->id);
-        $cartUser = $carts->get();
+        $carts = Cart::where('user_id', Auth::id())->get();
+    
+        // Validasi stok sebelum membuat pesanan
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+    
+            if ($product->stok < $cart->qty) {
+                return redirect()->back()->with('error', "Stok untuk produk {$product->nama} tidak mencukupi.");
+            }
+        }
     
         // Hitung total harga
-        $total = $cartUser->reduce(function ($carry, $cart) {
+        $total = $carts->reduce(function ($carry, $cart) {
             return $carry + ($cart->qty * $cart->product->harga);
         }, 0);
     
         // Buat pesanan
         $orders = Order::create([
-            'user_id' => Auth::user()->id,
+            'user_id' => Auth::id(),
             'total_price' => $total,
             'shipping_address' => Auth::user()->alamat,
             'payment_method' => $request->payment_method,
             'payment_status' => 'pending',
         ]);
     
-        // Buat detail pesanan
-        foreach ($cartUser as $cart) {
+        // Buat detail pesanan dan kurangi stok
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+    
+            // Kurangi stok produk
+            $product->update(['stok' => $product->stok - $cart->qty]);
+    
+            // Buat detail pesanan
             $orders->detail()->create([
                 'product_id' => $cart->product_id,
-                'qty' => $cart->qty, // Pastikan qty dari cart dicatat
+                'qty' => $cart->qty,
                 'subtotal' => $cart->qty * $cart->product->harga,
             ]);
         }
     
+        // Hapus keranjang setelah pesanan dibuat
         Cart::where('user_id', Auth::id())->delete();
     
         return redirect()->route('order.user')->with('success', 'Pesanan berhasil dibuat.');
     }
     
+    
+    public function validateStock(Request $request)
+{
+    $carts = Cart::where('user_id', Auth::id())->get();
+
+    if ($carts->isEmpty()) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Keranjang Anda kosong.'
+        ], 400);
+    }
+
+    $errors = [];
+    foreach ($carts as $cart) {
+        $product = $cart->product;
+
+        if ($product->stok < $cart->qty) {
+            $errors[] = "Stok untuk produk {$product->nama} tidak mencukupi (tersedia: {$product->stok}, diminta: {$cart->qty}).";
+        }
+    }
+
+    if (!empty($errors)) {
+        return response()->json([
+            'success' => false,
+            'message' => implode('<br>', $errors)
+        ], 400);
+    }
+
+    return response()->json([
+        'success' => true,
+        'message' => 'Stok mencukupi, lanjutkan pesanan.'
+    ]);
+}
+
 
     /**
      * Display the specified resource.

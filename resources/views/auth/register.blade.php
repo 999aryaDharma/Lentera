@@ -33,11 +33,12 @@
                         <small>{{ $message }}</small>
                     @enderror
                     <div class="relative">
-                        <input class="w-full p-2 rounded-xl border" type="password" name="password"
+                        <input id="password" class="w-full p-2 rounded-xl border" type="password" name="password"
                             placeholder="Password">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="gray"
-                            class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2" viewBox="0 0 16 16">
+                        <svg id="togglePassword" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                            fill="gray" class="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer"
+                            viewBox="0 0 16 16">
                             <path
                                 d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z" />
                             <path
@@ -78,6 +79,20 @@
             </div>
         </div>
     </section>
+    <script>
+        const passwordInput = document.getElementById('password');
+        const togglePassword = document.getElementById('togglePassword');
+    
+        togglePassword.addEventListener('click', function () {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+    
+            // Toggle the icon (optional)
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+    </script>
 </body>
 
 </html>

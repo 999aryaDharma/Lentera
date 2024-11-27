@@ -42,7 +42,7 @@ class AuthController extends Controller
     public function logoutproses(Request $request)
     {
         Auth::logout();
-        return redirect()->route('index')->with('success', 'Kamu berhasil logout');
+        return redirect()->route('index');
     }
 
     public function register()

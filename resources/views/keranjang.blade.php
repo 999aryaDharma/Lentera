@@ -6,6 +6,7 @@
     <div class="mt-20 flex place-content-center min-h-screen">
         <div class="px-4 py-8 sm:px-6 sm:py-10 w-4/6 lg:px-8">
             <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-mont">Cart</h2>
+            <small class="text-red-500 italic">*pastikan quantity tidak melebihi stok!</small>
 
             <!-- Barang -->
             @if ($carts->count() > 0)
@@ -16,13 +17,14 @@
                                 <a href="{{ route('detailProduct', ['id' => $cart->product->id]) }}">
                                     <div>
                                         <img src="{{ asset($cart->product->image) }}" alt=""
-                                            class="w-20 drop-shadow-lg">
+                                            class="w-28 drop-shadow-lg">
                                     </div>
                                 </a>
-                                <div>
+                                <div class="space-y-1">
                                     <h3 class="text-xl font-semibold text-gray-700">{{ $cart->product->name }}</h3>
-                                    <p class="mt-1 text-sm text-gray-500">{{ $cart->product->warna }}</p>
-                                    <p class="mt-1 text-sm text-gray-500">Size: {{ $cart->product->size }}</p>
+                                    <p class="text-sm text-gray-500">{{ $cart->product->warna }}</p>
+                                    <p class="text-sm text-gray-500">Size: {{ $cart->product->size }}</p>
+                                    <p class="text-sm text-gray-500">Stok: {{ $cart->product->stok }}</p>
                                     <p class="font-bold price">
                                         IDR {{ number_format($cart->product->harga, 2, ',', '.') }}
                                     </p>
@@ -52,13 +54,13 @@
                                     </form>
                                 </div>
 
-                                <div class="flex justify-between mt-2">
+                                <div class="flex justify-between">
                                     <span>Quantity :</span>
                                     <form action="{{ route('cart.update', [$cart->id]) }}" method="post" class="flex gap-2 items-center">
                                         @csrf
                                         @method('PUT')
                                         <input type="number" name="qty" value="{{ $cart->qty }}" min="1" 
-                                               class="w-10 text-center p-0 rounded-md border border-gray-300">
+                                               class="ml-1 w-10 text-center p-0 rounded-md border border-gray-300">
                                         <button type="submit" 
                                                 class="hover:bg-blue-500 hover:text-white p-1 rounded-md transition-all">
                                             <!-- Ikon Update -->
@@ -72,11 +74,10 @@
                                         </button>
                                     </form>
                                 </div>
-                                
+                                <div class="">
 
-                                <div class="mt-4">
                                     <p class="text-md text-center font-semibold text-gray-500">Sub Total</p>
-                                    <p class="font-bold subtotal">
+                                    <p class="font-bold subtotal text-center">
                                         IDR {{ number_format($cart->qty * $cart->product->harga, 2, ',', '.') }}
                                     </p>
                                 </div>

@@ -157,7 +157,6 @@
                                                             @method('DELETE')
                                                             <button type="submit" id="delete"
                                                                 class="hover:bg-red-500 hover:text-white p-1 rounded-md transition-all">
-                                                                <!-- Ikon Trash -->
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24"
                                                                     height="24" viewBox="0 0 24 24" fill="none"
                                                                     stroke="currentColor" stroke-width="2"

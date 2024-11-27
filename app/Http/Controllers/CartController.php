@@ -10,7 +10,18 @@ class CartController extends Controller
 {
     public function index()
     {
-        $carts = Cart::where('user_id', Auth::user()->id)->get();
+        if(Auth::id() == 0){
+            return redirect()->route('login');
+        } else {
+            $carts = Cart::where('user_id', Auth::user()->id)->get();
+            $total = $carts->sum(function ($cart) {
+                return $cart->qty * $cart->product->harga;
+            });
+            
+            return view('keranjang', compact('carts', 'total'));
+        }
+
+        $carts = Cart::where('user_id', Auth::user()->id)->with('product')->get();
         $total = $carts->sum(function ($cart) {
             return $cart->qty * $cart->product->harga;
         });
@@ -21,17 +32,22 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
-        $duplicate = Cart::where('product_id', $request->product_id)->first();
+        $duplicate = Cart::where('product_id', $request->product_id)->where('user_id', Auth::id())->first();
         if ($duplicate){
             return redirect()->route('cart.index')->with('failed', 'Your products is already in your Cart');
         }
-    
-        // Tambahkan ke cart
-        Cart::create([
-            'user_id' => Auth::id(), // Pastikan ini user yang login
-            'product_id' => $request->product_id,
-            'qty' => 1,
-        ]);
+        
+
+        if(Auth::id() == 0){
+            return redirect()->route('login');
+        } else {
+            Cart::create([
+                'user_id' => Auth::id(), // Pastikan ini user yang login
+                'product_id' => $request->product_id,
+                'qty' => 1,
+            ]);
+        }
+
     
         return redirect()->route('cart.index')->with('success', 'Product successfully added to your cart');
     }

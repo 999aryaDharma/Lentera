@@ -27,19 +27,27 @@
                     class="h-20"></a>
         </div>
 
-        <form class="w-3/5 px-3 mb-4">
-            <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-            <div class="relative">
-                <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                    </svg>
+        <form action="#" class="mt-4 w-2/3 px-3">
+            <div class="items-center mx-auto space-y-4 max-w-full-sm sm:flex sm:space-y-0">
+                <div class="relative w-full">
+                    <label for="search" class="hidden mb-2 text-sm font-medium text-gray-900">Search</label>
+                    <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none text-gray-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-search">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+                            <path d="M21 21l-6 -6" />
+                        </svg>
+                    </div>
+                    <input
+                        class="block py-2 pl-10 w-full text-sm text-gray-900 bg-gray-100 rounded-lg sm:rounded-none sm:rounded-l-lg border-gray-300"
+                        placeholder="Search in Lentera" type="search" id="search">
                 </div>
-                <input type="text" id="search"
-                    class="mt-4 h-10 block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-indigo-500/40 focus:border-indigo-500/40 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Search in Lentera" required />
+                <div>
+                    <button type="submit"
+                        class="btn py-2 px-4 w-full text-sm font-medium text-center text-white rounded-lg border cursor-pointer bg-indigo-500/90 sm:rounded-none sm:rounded-r-lg hover:bg-indigo-700 focus:ring-4 focus:ring-primary-300">Search</button>
+                </div>
             </div>
         </form>
 
@@ -107,7 +115,8 @@
                         <div class="flex pl-2 py-0 hover:bg-gray-100">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                 <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
                                 <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
@@ -121,14 +130,15 @@
                     <div class="flex pl-2 py-0 hover:bg-gray-100">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout my-2 ml-1">
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-logout my-2 ml-1">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                             <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
                             <path d="M9 12h12l-3 -3" />
                             <path d="M18 15l3 -3" />
                         </svg>
-                        <a href="{{ route('logout') }}"
-                            class="block px-1 py-2 text-sm font-bold text-gray-700 rounded-lg">Logout</a>
+                        <a id='logout'
+                            class="block px-1 py-2 text-sm font-bold text-gray-700 rounded-lg cursor-pointer">Logout</a>
                     </div>
                     <hr class="mx-3">
                     <div class="flex pl-2 py-0 hover:bg-gray-100">

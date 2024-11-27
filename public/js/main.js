@@ -152,15 +152,42 @@ $(function () {
     });
 });
 
+// Validasi Logout
+$(function () {
+    $(document).on('click', '#logout', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You want to logout?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Logout!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Tampilkan SweetAlert untuk notifikasi sukses
+                Swal.fire({
+                    title: "Success!",
+                    text: "Logout Success.",
+                    icon: "success",
+                    confirmButtonColor: '#7066E0',
+                }).then(() => {
+                    window.location.href = '/logoutproses';
+                });
+            }
+        });
+    });
+});
+
 
 // Check Out Validate
-$(function() {
-    $(document).on('click', '#checkout', function(e) {
+$(function () {
+    $(document).on('click', '#checkout', function (e) {
         e.preventDefault();
 
-        var form = $(this).closest('form'); // Ambil formulir terdekat
-        var paymentMethod = form.find('[name="payment_method"]')
-    .val(); // Ambil nilai payment_method
+        var form = $(this).closest('form'); // Form checkout
+        var paymentMethod = form.find('[name="payment_method"]').val(); // Payment method
 
         // Validasi payment_method
         if (!paymentMethod) {
@@ -170,33 +197,57 @@ $(function() {
                 icon: "error",
                 confirmButtonColor: "#d33",
             });
-            return; // Hentikan proses jika payment_method kosong
+            return;
         }
 
-        // Tampilkan SweetAlert untuk konfirmasi
-        Swal.fire({
-            title: "Are you sure?",
-            text: "You want to make this order?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, Order it!"
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Tampilkan SweetAlert untuk notifikasi sukses
+        // AJAX ke backend untuk validasi stok
+        $.ajax({
+            url: '/validate-stock', // Endpoint validasi stok
+            type: 'POST',
+            data: form.serialize(),
+            success: function (response) {
+                if (response.success) {
+                    // Konfirmasi sebelum checkout
+                    Swal.fire({
+                        title: "Are you sure?",
+                        text: "You want to make this order?",
+                        icon: "warning",
+                        showCancelButton: true,
+                        confirmButtonColor: "#3085d6",
+                        cancelButtonColor: "#d33",
+                        confirmButtonText: "Yes, Order it!"
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // SweetAlert untuk sukses
+                            Swal.fire({
+                                title: "Success!",
+                                text: "Order was successfully placed!",
+                                icon: "success",
+                                confirmButtonColor: '#7066E0',
+                            }).then(() => {
+                                form.submit();
+                            });
+                        }
+                    });
+                }
+            },
+            error: function (xhr) {
+                // Tampilkan SweetAlert untuk stok tidak cukup
                 Swal.fire({
-                    title: "Success!",
-                    text: "Order was successfully placed!",
-                    icon: "success",
-                    confirmButtonColor: '#7066E0',
+                    title: "Error",
+                    text: xhr.responseJSON.message || "There was an error processing your request",
+                    icon: "error",
+                    confirmButtonColor: "#d33",
                 }).then(() => {
-                    form.submit();
+                    window.location.href = '/cart'; // Redirect ke halaman keranjang
                 });
             }
         });
     });
 });
+
+
+
 
 
 

@@ -7,32 +7,32 @@
             <!-- card barang -->
             <div class="px-4 py-6 sm:px-6 sm:py-10 w-3/6 lg:px-8">
                 <h2 class="text-2xl font-bold tracking-tight text-gray-900 font-mont">Your Products Here</h2>
-                @foreach ($carts as $cart)
-                    <!-- Cart Item -->
+                @foreach ($products as $product)
+                    <!-- product Item -->
                     <div
                         class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-7 lg:max-w-7xl lg:px-6 shadow-md mt-5 drop-shadow-lg">
                         <div class="flex justify-between">
                             <div class="flex gap-5 place-items-center">
                                 <div>
-                                    <img src="{{ $cart->product->image }}" alt="{{ $cart->product->name }}" class="w-28">
+                                    <img src="{{ $product->product->image }}" alt="{{ $product->product->name }}" class="w-28">
                                 </div>
                                 <div>
-                                    <h3 class="text-lg text-gray-700">{{ $cart->product->name }}</h3>
-                                    <p class="mt-1 text-sm text-gray-500">{{ $cart->product->warna }}</p>
-                                    <p class="mt-1 text-sm text-gray-500">Size: {{ $cart->product->size }}</p>
-                                    <p class="font-bold">Rp {{ number_format($cart->product->harga, 0, ',', '.') }}</p>
+                                    <h3 class="text-lg text-gray-700">{{ $product->product->name }}</h3>
+                                    <p class="mt-1 text-sm text-gray-500">{{ $product->product->warna }}</p>
+                                    <p class="mt-1 text-sm text-gray-500">Size: {{ $product->product->size }}</p>
+                                    <p class="font-bold">Rp {{ number_format($product->product->harga, 0, ',', '.') }}</p>
                                 </div>
                             </div>
 
                             <div class="place-content-center space-y-1 mb-0">
                                 <div class="flex gap-5 rounded-lg justify-between w-60">
                                     <h1 class="font-semibold">Quantity</h1>
-                                    <input type="hidden" name="cart[{{ $cart->id }}][qty]" value="{{ $cart->qty }}">
-                                    <span>{{ $cart->qty }} pcs</span>
+                                    <input type="hidden" name="product[{{ $product->id }}][qty]" value="{{ $product->qty }}">
+                                    <span>{{ $product->qty }} pcs</span>
                                 </div>
                                 <div class="flex gap-5 rounded-lg justify-between w-60">
                                     <h1 class="font-semibold">Sub Total</h1>
-                                    <span>Rp {{ number_format($cart->qty * $cart->product->harga, 0, ',', '.') }}</span>
+                                    <span>Rp {{ number_format($product->qty * $product->product->harga, 0, ',', '.') }}</span>
                                 </div>
                             </div>
                         </div>
@@ -127,24 +127,15 @@
                             <label for="name" class="block text-sm font-semibold">Name</label>
                             <input type="text" name="name" id="name" value="{{ $user->name }}"
                                 class="w-full p-2 border border-gray-300 rounded-md">
-                            @error('name')
-                                <small class="text-red-500">{{ $message }}</small>
-                            @enderror
                         </div>
                         <div>
                             <label for="telepon" class="block text-sm font-semibold">Telepon</label>
                             <input type="text" name="telepon" id="telepon" value="{{ $user->telepon }}"
                                 class="w-full p-2 border border-gray-300 rounded-md">
-                            @error('telepon')
-                                <small class="text-red-500">{{ $message }}</small>
-                            @enderror
                         </div>
                         <div>
                             <label for="alamat" class="block text-sm font-semibold">Alamat</label>
                             <textarea name="alamat" id="alamat" rows="3" class="w-full p-2 border border-gray-300 rounded-md">{{ $user->alamat }}</textarea>
-                            @error('alamat')
-                                <small class="text-red-500">{{ $message }}</small>
-                            @enderror
                         </div>
                         <div class="flex justify-end gap-3 mt-4">
                             <button type="button" class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg"
@@ -169,5 +160,6 @@
         });
     </script>
 
-    <script></script>
+    <script>
+    </script>
 @endsection

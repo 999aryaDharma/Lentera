@@ -53,12 +53,12 @@ class productController extends Controller
 
 
         $image = $request->file('image');
-        $destinationPath = public_path('image/carousel'); // Lokasi penyimpanan di folder public/image/carousel
+        $destinationPath = public_path('image'); // Lokasi penyimpanan di folder public/image/carousel
         $imageName = time() . '-' . $image->getClientOriginalName(); // Membuat nama file unik
         $image->move($destinationPath, $imageName); // Memindahkan file ke folder tujuan
 
         // Path relatif untuk disimpan di database
-        $imagePath = 'image/carousel/' . $imageName;
+        $imagePath = 'image/' . $imageName;
 
         $data = product::create([
             'name' => $request->name,

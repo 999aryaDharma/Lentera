@@ -182,8 +182,8 @@
                 </li>
 
                 <li class="mt-0.5 w-full">
-                    <a class="py-2.7 px-2 text-sm text-white ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap transition-all duration-100 rounded-lg group hover:bg-white hover:text-black"
-                        href="{{ route('logout') }}">
+                    <a class=" cursor-pointer py-2.7 px-2 text-sm text-white ease-nav-brand my-0 mx-4 flex items-center whitespace-nowrap transition-all duration-100 rounded-lg group hover:bg-white hover:text-black"
+                        id="logout">
                         <div
                             class="mr-2 flex h-10 w-10 items-center justify-center rounded-lg bg-white bg-center stroke-0 text-center xl:p-2.5 group-hover:bg-gradient-to-tl group-hover:from-purple-700 group-hover:to-pink-500">
                             <!-- Logo Place -->

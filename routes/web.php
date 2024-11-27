@@ -31,9 +31,12 @@ Route::resource('/cart', 'App\Http\Controllers\CartController');
 // Check Out Method
 Route::put('/update-userinfo', [userController::class, 'updateUserInfo'])->name('updateUserInfo');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/checkout-single/{id}', [CheckoutController::class, 'indexSingle'])->name('checkout.single');
 Route::post('/order/create', [OrderController::class, 'store'])->name('order.store');
 Route::get('/order/succes', [OrderController::class, 'indexUser'])->name('order.user');
 Route::delete('/orderuser/destroy/{id}', [OrderController::class, 'destroyOrderUser'])->name('orderuser.destroy');
+Route::post('/validate-stock', [OrderController::class, 'validateStock'])->name('validate.stock');
+
 
 
 // Admin Route
