@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\categoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\productAdminController;
@@ -24,6 +25,7 @@ Route::post('/registerproses', [AuthController::class, 'registerproses'])->name(
 
 // halaman customer
 route::get('/', [productController::class, 'web'])->name('index');
+// route::get('/', [CarouselController::class, 'web'])->name('index');
 
 // route::get('/detail', [productController::class, 'web'])->name('index');
 
@@ -82,7 +84,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
 
     // Carousel Controller
     route::resource('/carousel', 'App\Http\Controllers\CarouselController');
+
+    // Search
+    // Route::get('/product/search', [productController::class, 'searchProduct']);
+    Route::get('/product/search', [productController::class, 'searchProduct'])->name('searchProduct');
     
 });
+
+
+// search
+Route::get('/search', [productController::class, 'search']);
+
 
 

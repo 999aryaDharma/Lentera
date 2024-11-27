@@ -221,7 +221,7 @@ class productController extends Controller
             $newImageName = time() . '_' . $newImage->getClientOriginalName();
             $newImage->move(public_path('images/'), $newImageName);
 
-            $product->image = 'images/' . $newImageName;
+            $product->image =$newImageName;
         }
         // Simpan data produk
         $product->save();
@@ -250,6 +250,59 @@ class productController extends Controller
         $product::where('id', $product->id)->delete();
 
         return redirect()->route('adminpage.product.index');
+    }
+
+
+
+    // SEARCH
+    public function search(Request $request){
+        if($request->has('search')){
+            $dataproduct = product::where('product', 'LIKE', '%'. $request->search.'%')->orWhere('warna', 'LIKE', '%' . $request->search . '%')->get(); 
+            // $dataproduct = product::where('warna', 'LIKE', '%'. $request->search.'%')->get();
+
+            if ($dataproduct->isEmpty()){
+                $dataproduct = product::all();
+            }
+        }
+        
+        else {
+            $dataproduct = product::all();
+        }
+
+        return view('search', compact('dataproduct'));
+    }
+
+
+    // public function searchProduct(Request $request){
+    //     if($request->has('searchProduct')) {
+    //         $products = product::where('product', 'LIKE', '%' . $request->searchProduct . '%')->orWhere('warna', 'LIKE', '%' . $request->searchProduct . '%')->get();
+    //         // $products = product::where('warna', 'LIKE', '%'. $request->searchProduct.'%')->get();
+
+    //         if ($products->isEmpty()) {
+    //             $products = product::all();
+    //         }
+    //     } else {
+    //         $products = product::all();
+    //     }
+
+    //     return view('admin.product', compact('products'));
+    // }
+
+    public function searchProduct(Request $request)
+    {
+        if ($request->has('search')) {
+            $products = product::where('product', 'LIKE', '%' . $request->search . '%')
+            ->orWhere('warna', 'LIKE', '%' . $request->search . '%')
+            ->get();
+
+            if ($products->isEmpty()) {
+                $products = product::all();
+            }
+        } else {
+            $products = product::all();
+        }
+
+        return view('admin.product', compact('products'));
     }
 
 }

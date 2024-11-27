@@ -32,14 +32,8 @@
                     </div>
 
                     <div class="space-y-1">
-                        <label for="">Category</label>
+                        <label for="category">Category</label>
                         <input type="text" name="category" value="{{$data->category}}"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
-                    </div>
-
-                    <div class="space-y-1">
-                        <label for="">Jumlah</label>
-                        <input type="number" name="jumlah" value="{{$data->jumlah}}"
                             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                     </div>
 

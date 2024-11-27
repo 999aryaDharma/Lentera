@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 class CarouselController extends Controller
 {
      // Carousels Controller Admin
+
      public function index()
      {
          $carousels = Carousel::get();
