@@ -5,7 +5,6 @@
 @endsection
 
 @section('admin')
-@vite('resources/css/app.css')
 
 <div class="container mx-auto p-3">
     <div class="flex items-center justify-between mb-6">
@@ -26,23 +25,10 @@
                     @csrf
                     @method('PUT')
                     <div class="space-y-1">
-                        <label for="">Id Category</label>
-                        <input type="text" name="id" placeholder="" value="{{$data->id}}" disabled
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
-                    </div>
-
-                    <div class="space-y-1">
                         <label for="">Category</label>
                         <input type="text" name="category" value="{{$data->category}}"
                             class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
                     </div>
-
-                    <div class="space-y-1">
-                        <label for="">Jumlah</label>
-                        <input type="number" name="jumlah" value="{{$data->jumlah}}"
-                            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-green-200">
-                    </div>
-
 
                     <hr class="border-gray-300 my-4">
                     <button type="submit" id="update"

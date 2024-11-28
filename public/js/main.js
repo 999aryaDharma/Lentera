@@ -121,7 +121,6 @@ $(function () {
 });
 
 
-
 // Sweet Alert Update
 $(function () {
     $(document).on('click', '#update', function (e) {
@@ -179,7 +178,6 @@ $(function () {
         });
     });
 });
-
 
 // Check Out Validate
 $(function () {

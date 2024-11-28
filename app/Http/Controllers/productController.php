@@ -16,9 +16,11 @@ class productController extends Controller
      */
     public function index()
     {
-        $products = product::all();
+        $products = Product::orderBy('category_id', 'asc')->get();
+    
         return view('admin.product', compact('products'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -52,13 +54,6 @@ class productController extends Controller
         }
 
 
-        $image = $request->file('image');
-        $destinationPath = public_path('image'); // Lokasi penyimpanan di folder public/image/carousel
-        $imageName = time() . '-' . $image->getClientOriginalName(); // Membuat nama file unik
-        $image->move($destinationPath, $imageName); // Memindahkan file ke folder tujuan
-
-        // Path relatif untuk disimpan di database
-        $imagePath = 'image/' . $imageName;
 
         $data = product::create([
             'name' => $request->name,
@@ -68,11 +63,19 @@ class productController extends Controller
             'deskripsi' => $request->deskripsi,
             'harga' => $request->harga,
             'stok' => $request->stok,
-            'image' => $imagePath,
+            'image' => $request->image,
         ]);
 
-        $data->save();
+        // $image = time() . '.' . $request->image->extension();
+        // $request->image->move(public_path('images'), $image);
 
+
+
+        if ($request->hasFile('image')) {
+            $request->file('image')->move(public_path('image'), $request->file('image')->getClientOriginalName());
+            $data->image = 'image/' . $request->file('image')->getClientOriginalName();
+            $data->save();
+        }
 
         return redirect()->route('adminpage.product.index')->with('success', 'Product created successfully');
     }
@@ -88,15 +91,18 @@ class productController extends Controller
         $products = product::orderBy('created_at', 'desc')
             ->take(5)
             ->get();
-        $allProducts = product::all();
-        return view('index', compact('products', 'category', 'carousels', 'carts', 'allProducts'));
+        $bestseller = product::whereHas('orderDetails')->withSum('orderDetails as total_sale', 'qty')->orderByDesc('total_sale')
+            ->take (5)
+            ->get();
+        $allProducts = product::orderBy('category_id', 'asc')->get();
+        return view('index', compact('products', 'category', 'carousels', 'carts', 'allProducts', 'bestseller'));
     }
 
     public function detailProduct(string $id)
     {
         $carts = Cart::all();
         $products = product::with('category')->find($id);
-        $allProducts = product::all();
+        $allProducts = product::orderBy('category_id', 'asc')->get();
         return view('detail', compact('products', 'carts', 'allProducts'));
     }
 

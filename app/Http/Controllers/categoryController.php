@@ -46,7 +46,6 @@ class categoryController extends Controller
         //
         category::create([
             'category' => $request->category,
-            'jumlah' => $request->jumlah,
         ]);
 
         return redirect()->route('adminpage.category.index');
@@ -80,7 +79,6 @@ class categoryController extends Controller
         //
         category::where('id', $category->id)->update([
             'category' => $request->category,
-            'jumlah' => $request->jumlah,
         ]);
 
         return redirect()->route('adminpage.category.index');

@@ -80,7 +80,7 @@
                                                         class="h-24"></span>
                                             </td>
 
-                                            <td class="py-8 text-center border-b flex justify-center space-x-1">
+                                            <td class="py-10 text-center border-b flex justify-center space-x-1">
                                                 {{-- Edit Button --}}
                                                 <button
                                                     class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white grid place-content-center">

@@ -5,7 +5,6 @@
 @endsection
 
 @section('admin')
-@vite('resources/css/app.css')
 <div class="container mx-auto p-3">
     <div class="flex items-center justify-between mb-6">
         <h1 class="font-bold text-3xl"></h1>
@@ -22,8 +21,6 @@
                 <h2 class="text-xl font-medium text-center text-gray-900 mb-6">Create a New Product</h2>
                 <form action="{{ route('adminpage.product.store') }}" method="POST" data-redirect-route="/admin/product" class="space-y-4" enctype="multipart/form-data">
                     @csrf
-
-
                     <div class="space-y-1">
                         <label for="name">Nama Produk</label>
                         <input type="text" name="name" class="w-full p-2 border border-gray-300 rounded-lg" required>
@@ -86,8 +83,7 @@
 
                     <div class="space-y-1">
                         <label for="deskripsi">Deskripsi</label>
-                        <textarea type="text" name="deskripsi" class="w-full p-2 border border-gray-300 rounded-lg" required>
-                        </textarea>
+                        <input type="text" name="deskripsi" class="w-full p-2 border border-gray-300 rounded-lg">
                         @error('deskripsi')
 
                         <small class="text-red-500">{{$message}}</small>
