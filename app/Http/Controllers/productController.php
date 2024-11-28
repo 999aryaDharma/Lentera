@@ -190,7 +190,7 @@ class productController extends Controller
             'deskripsi' => 'required',
             'harga' => 'required',
             'stok' => 'required',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg', // Gambar tidak wajib
+            'image' => 'nullable|image', // Gambar tidak wajib
         ]);
 
         if ($validator->fails()) {

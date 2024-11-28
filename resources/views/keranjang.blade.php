@@ -57,7 +57,7 @@
                                     <form action="{{ route('cart.update', [$cart->id]) }}" method="post" class="flex gap-2 items-center">
                                         @csrf
                                         @method('PUT')
-                                        <input type="number" name="qty" value="{{ $cart->qty }}" min="1" 
+                                        <input type="number" name="qty" value="{{ $cart->qty }}" min="1" max="{{$cart->product->stok}}"
                                                class="w-10 text-center p-0 rounded-md border border-gray-300">
                                         <button type="submit" 
                                                 class="hover:bg-blue-500 hover:text-white p-1 rounded-md transition-all">

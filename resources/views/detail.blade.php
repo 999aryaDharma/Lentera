@@ -35,11 +35,20 @@
             {{ $data->deskripsi }}
         </p>
         <div class="product-single_addtocart flex space-x-4 mt-4">
+            @if($data->stok > 0)
             <button class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">
                 <a href="{{ route('checkout.index') }}">Beli</a></button>
             <input type="hidden" name="product_id" value="{{ $data->id }}">
             <button type="submit" class="bg-indigo-500/90 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg">+
                 Keranjang</button>
+            @else
+            <button class="bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed" disabled>
+                Beli
+            </button>
+            <button class="bg-gray-400 text-white px-4 py-2 rounded-lg cursor-not-allowed" disabled>
+                + Keranjang
+            </button>
+            @endif
         </div>
     </form>
 </div>

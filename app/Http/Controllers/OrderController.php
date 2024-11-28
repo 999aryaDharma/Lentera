@@ -87,6 +87,25 @@ class OrderController extends Controller
             ]);
         }
 
+        // mengurangi stok jika membuat order
+        foreach ($cartUser as $cart) {
+            // Kurangi stok produk
+            $product = product::findOrFail($cart->product_id);
+
+            if ($product->stok < $cart->qty) {
+                return redirect()->back()->with('error', 'Stok produk ' . $product->product . ' tidak mencukupi.');
+            }
+
+            $product->update(['stok' => $product->stok - $cart->qty]);
+
+            // Simpan detail pesanan
+            $orders->detail()->create([
+                'product_id' => $cart->product_id,
+                'qty' => $cart->qty,
+                'subtotal' => $cart->qty * $cart->product->harga,
+            ]);
+        }
+
         
 
         Cart::where('user_id', Auth::id())->delete();
@@ -149,6 +168,11 @@ class OrderController extends Controller
     {
         $order = Order::findOrFail($id);
 
+        // menambah stok kembali 
+        foreach ($order->detail as $detail) {
+            $product = product::findOrFail($detail->product_id);
+            $product->update(['stok' => $product->stok + $detail->qty]);
+        }
         // Hapus detail pesanan terlebih dahulu
         $order->detail()->delete();
     
@@ -161,6 +185,12 @@ class OrderController extends Controller
     public function destroyOrderUser($id)
     {
         $order = Order::findOrFail($id);
+
+        // menambah stok kembali
+        foreach ($order->detail as $detail) {
+            $product = product::findOrFail($detail->product_id);
+            $product->update(['stok' => $product->stok + $detail->qty]);
+        }
 
         // Hapus detail pesanan terlebih dahulu
         $order->detail()->delete();

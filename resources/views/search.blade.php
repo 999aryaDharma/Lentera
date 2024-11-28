@@ -5,10 +5,17 @@
 
 <div class="mx-auto max-w-2xl px-4 py-8 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8 mt-24">
 
+    @if ($dataproduct->isEmpty())
+    <h2>No results found. Showing all products:</h2>
+
+    @else
+
+
+    @endif
+
+    <h2 class="text-2xl font-bold tracking-tight text-gray-900">Rekomendasi</h2>
+
     <div class="mt-6 grid grid-cols-1 gap-x-3 gap-y-5 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-4">
-        @if ($dataproduct->isEmpty())
-        <h2>No results found. Showing all products:</h2>
-        @endif
 
         @foreach ($dataproduct as $product)
 
