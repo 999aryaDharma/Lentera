@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\CarouselController;
-use App\Http\Controllers\categoryController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\productAdminController;
-use App\Http\Controllers\productController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CheckoutController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WebController;
-use App\Http\Middleware\AdminMiddleware;
 use App\Models\product;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\productController;
+use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\categoryController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\productAdminController;
 
 
 // Auth Controller
@@ -96,4 +97,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', AdminMiddleware::cla
 Route::get('/search', [productController::class, 'search']);
 
 
-
+Route::get('chat', [ChatController::class, 'index'])->name('chat.index');
+Route::post('chat', [ChatController::class, 'ask'])->name('chat');

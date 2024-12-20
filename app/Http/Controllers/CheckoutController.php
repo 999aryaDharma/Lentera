@@ -19,4 +19,6 @@ class CheckoutController extends Controller
 
         return view('checkout', compact('carts', 'total', 'user'));
     }
+
+    
 }
