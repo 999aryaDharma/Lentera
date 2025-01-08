@@ -23,7 +23,8 @@
     <nav
         class="h-20 shadow-md shadow-indigo-500/40 fixed w-full top-0 bg-white flex justify-around place-items-center z-50">
         <div>
-            <a href="{{route('index')}}" class="text-white"><img src="/img/logo.png" alt="logo" class="h-20"></a>
+            <a href="{{ route('index') }}" class="text-white"><img src="/img/logo.png" alt="logo"
+                    class="h-20"></a>
         </div>
 
         <form class="w-3/5 px-3 mb-4" action="/search" method="GET">
@@ -42,19 +43,35 @@
             </div>
         </form>
 
+        <div>
+            {{-- chatbot --}}
+            <a href="{{ route('chat') }}">
+                <div
+                    class="flex group transition-background duration-300 ease-in-out hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
+                    <svg class="w-6 h-6 text-indigo-500 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                    </svg>
+                    <span>Chat</span>
+                </div>
+            </a>
+        </div>
+
         <div class="flex">
             @if (auth()->check() && auth()->user()->carts()->count() > 0)
-            <div
-                class="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform translate-x-2 -translate-y-2">
-                {{ auth()->user()->carts()->sum('qty') }}
-            </div>
+                <div
+                    class="bg-red-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center transform translate-x-2 -translate-y-2">
+                    {{ auth()->user()->carts()->sum('qty') }}
+                </div>
             @endif
+
+
 
 
             <a href="{{ route('cart.index') }}">
                 <div
                     class="flex transition-background duration-300 ease-in-out hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                    <svg xmlns="http://www.w3.org/20    00/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-shopping-cart">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -69,82 +86,84 @@
 
         </div>
         @guest
-        <div class="flex justify-between gap-1 mx-1">
-            <button
-                class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700 transition-background duration-300 ease-in-out"><a
-                    href="{{ route('login') }}" class="text-center m-5 text-white">Masuk</a></button>
-            <button
-                class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white transition-background duration-300 ease-in-out"><a
-                    href="{{ route('register') }}" class="text-center m-5 ">Daftar</a></button>
-        </div>
+            <div class="flex justify-between gap-1 mx-1">
+                <button
+                    class="btn bg-indigo-500/90 h-8 rounded-lg hover:bg-indigo-700 transition-background duration-300 ease-in-out"><a
+                        href="{{ route('login') }}" class="text-center m-5 text-white">Masuk</a></button>
+                <button
+                    class="btn rounded-lg h-8 border-2 border-indigo-500/90 hover:bg-indigo-700 text-indigo-500/90 hover:text-white transition-background duration-300 ease-in-out"><a
+                        href="{{ route('register') }}" class="text-center m-5 ">Daftar</a></button>
+            </div>
         @else
-        <div class="relative mr-16">
-            <!-- Bagian ikon dan nama user -->
-            <div class="flex items-center cursor-pointer transition-background duration-300 ease-in-out hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md"
-                onclick="toggleDropdown()">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-user">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-                    <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                </svg>
-                <h1>{{ Auth::user()->name }}</h1>
-                <svg id="chevronIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round"
-                    class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down pl-1 transition-transform duration-200 ease-out">
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <path d="M6 9l6 6l6 -6" />
-                </svg>
-            </div>
+            <div class="relative mr-16">
+                <!-- Bagian ikon dan nama user -->
+                <div class="flex items-center cursor-pointer transition-background duration-300 ease-in-out hover:bg-indigo-500 hover:text-white p-1 px-2 rounded-md"
+                    onclick="toggleDropdown()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-user">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                    </svg>
+                    <h1>{{ Auth::user()->name }}</h1>
+                    <svg id="chevronIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-chevron-down pl-1 transition-transform duration-200 ease-out">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M6 9l6 6l6 -6" />
+                    </svg>
+                </div>
 
-            <!-- User Dropdown -->
-            <div id="dropdownMenu"
-                class="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 transform scale-95 transition-all duration-200 ease-out hidden">
-                @if (Auth::user()->role == 'admin')
-                <div class="flex pl-2 py-0 hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                        <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                        <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
-                    </svg>
-                    <a href="{{ route('adminpage.dashboard') }}"
-                        class="block px-2 py-2 mt-1 text-sm font-bold text-gray-700 rounded-lg">Admin Page</a>
-                </div>
-                <hr class="mx-3">
-                @endif
-                <div class="flex pl-2 py-0 hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-logout my-2 ml-1">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
-                        <path d="M9 12h12l-3 -3" />
-                        <path d="M18 15l3 -3" />
-                    </svg>
-                    <a href="{{ route('logout') }}"
-                        class="block px-1 py-2 text-sm font-bold text-gray-700 rounded-lg">Logout</a>
-                </div>
-                <hr class="mx-3">
-                <div class="flex pl-2 py-0 hover:bg-gray-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-notes my-2">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
-                        <path d="M9 7l6 0" />
-                        <path d="M9 11l6 0" />
-                        <path d="M9 15l4 0" />
-                    </svg>
-                    <a href="{{ route('order.user') }}"
-                        class="block px-2 py-2 text-sm font-bold text-gray-700 rounded-lg">Your Orders</a>
+                <!-- User Dropdown -->
+                <div id="dropdownMenu"
+                    class="absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg opacity-0 transform scale-95 transition-all duration-200 ease-out hidden">
+                    @if (Auth::user()->role == 'admin')
+                        <div class="flex pl-2 py-0 hover:bg-gray-100">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round"
+                                class="icon icon-tabler icons-tabler-outline icon-tabler-home mt-2">
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                                <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+                            </svg>
+                            <a href="{{ route('adminpage.dashboard') }}"
+                                class="block px-2 py-2 mt-1 text-sm font-bold text-gray-700 rounded-lg">Admin Page</a>
+                        </div>
+                        <hr class="mx-3">
+                    @endif
+                    <div class="flex pl-2 py-0 hover:bg-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="icon icon-tabler icons-tabler-outline icon-tabler-logout my-2 ml-1">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+                            <path d="M9 12h12l-3 -3" />
+                            <path d="M18 15l3 -3" />
+                        </svg>
+                        <a href="{{ route('logout') }}"
+                            class="block px-1 py-2 text-sm font-bold text-gray-700 rounded-lg">Logout</a>
+                    </div>
+                    <hr class="mx-3">
+                    <div class="flex pl-2 py-0 hover:bg-gray-100">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-notes my-2">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M5 3m0 2a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-10a2 2 0 0 1 -2 -2z" />
+                            <path d="M9 7l6 0" />
+                            <path d="M9 11l6 0" />
+                            <path d="M9 15l4 0" />
+                        </svg>
+                        <a href="{{ route('order.user') }}"
+                            class="block px-2 py-2 text-sm font-bold text-gray-700 rounded-lg">Your Orders</a>
+                    </div>
                 </div>
             </div>
-        </div>
         @endguest
     </nav>
 

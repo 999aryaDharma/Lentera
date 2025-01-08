@@ -75,10 +75,10 @@
             <form id="chat-form" class="mt-4">
                 <div class="flex items-center gap-2">
                     <input type="text" id="user-input"
-                        class="flex-1 px-4 py-2 rounded-full border border-purple-200 focus:ring-2 focus:ring-purple-500 focus:border-transparent shadow-sm transition-all duration-200"
+                        class="flex-1 px-4 py-2 rounded-full border border-purple-200 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:border-transparent transition-all duration-200"
                         placeholder="Type your message..." required>
                     <button type="submit"
-                        class="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors duration-200 shadow-md">
+                        class="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors duration-200 shadow-md rotate-90">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
